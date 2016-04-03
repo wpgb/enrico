@@ -58,6 +58,26 @@ if(!get_post_meta($post->ID, "enrico-auto-update" , true)){
                                 value="<?php echo get_post_meta($post->ID, 'enrico-eniroId', true) ?>">
                         <input type="submit" value="Submit"></td>
                         
+                
+                <tr valign="top">
+                    <th scope="row">About</th>
+                        <td>        
+                            <?php $field_value = get_post_meta( $post->ID, 'enrico-about', false );
+
+                      // Settings that we'll pass to wp_editor
+                      $args = array (
+                            'tinymce' => false,
+                            'quicktags' => true,
+                            'media_buttons' => false,
+                            'textarea_rows' => 5,
+                            'teeny' => true,
+                            
+                      );
+                      wp_editor( $field_value[0], 'enrico-about', $args ); ?>
+  
+  
+</td></tr>
+        
                 <tr valign="top">
                     <th scope="row">Eniro Info</th>
                         
@@ -110,6 +130,11 @@ function update_enrico_post_meta($post_id,$post){
     //Save the Eniro ID if set
     if( isset( $_POST[ 'enrico-eniroId' ] ) ) {
         update_post_meta( $post_id, 'enrico-eniroId', sanitize_text_field( $_POST[ 'enrico-eniroId'] ) );
+    }
+    
+    //Save the text area 'eniro-about' field
+    if( isset( $_POST[ 'enrico-about' ] ) ) {
+        update_post_meta( $post_id, 'enrico-about', stripslashes( $_POST[ 'enrico-about'] ) );
     }
     
     //Loop through and save all textfields with current value

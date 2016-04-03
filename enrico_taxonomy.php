@@ -28,7 +28,7 @@ function enrico_register_post() {
   	'capability-typ' => 'post',
   	'has_archive' => true,
   	'menu_position' => 5,
-  	'supports'      => array( 'title','thumbnail','comments','excerpt', 'content'),
+  	'supports'      => array( 'title','thumbnail','comments','excerpt',),
   	'rewrite' => array('slug' => 'enrico'),
   	);
 

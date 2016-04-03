@@ -1,0 +1,36 @@
+#enricomapdiv {
+    margin: 0px;
+	padding: 0px;
+	
+}
+
+.enricomap-single {
+    height: 500px; 
+    width:50%; 
+    float:left;
+    border: 1px solid black;
+}
+
+.enricomap-multi {
+    height: 600px; 
+    width:90%; 
+    border: 1px solid black;
+
+    
+}
+
+.enrico-singlepost-info {
+    width:50%; 
+    height: 500px;
+    float:left;  
+    margin: 0px;
+  	padding: 0px;
+  	border: 1px solid black;
+}
+
+.enrico-multipost-info {
+    width:50%; 
+    margin: 0px;
+  	padding: 10px;
+  	border: 1px solid black;
+}
