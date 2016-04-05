@@ -29,6 +29,7 @@ add_action('admin_init','enrico_settings_register');
 
 //Settings for Custom template for enrico post type
 add_filter('template_include', 'enrico_template_include',1);
+add_filter( 'taxonomy_template', 'get_custom_taxonomy_template' );
 
 //Add Stylesheet for the plugin
 add_action( 'wp_enqueue_scripts', 'enrico_add_stylesheet' );
@@ -67,6 +68,18 @@ function enrico_template_include($template_path){
         }
     
     return $template_path;
+    }
+
+function get_custom_taxonomy_template($template_path){
+    if(is_tax( 'partner_type', '' )){
+        if ($theme_file = locate_template (array('taxonomy-partner_type.php'))){
+                $template_path = $theme_file;
+        }
+        else {
+        $template_path = plugin_dir_path(__FILE__).'/templates/taxonomy-partner_type.php';
+                }
+        }   
+   return $template_path;
     }
 
 

@@ -9,6 +9,20 @@
 //Register Custom Post type for enricoanies (post_type= enrico)
 
 function enrico_register_post() {
+    
+    register_taxonomy(
+        'partner_type',
+        'enrico',
+        array(
+            'label' => 'Partners',
+            'singular_label' => 'Partner',
+            'hierarchical' => true,
+            'query_var' => true,
+            'rewrite' => array('slug' => 'partners'),
+        )
+    );
+
+    
     $labels = array(
   	'name' => __('Enrico Companies'),
   	'singular_name' => __('company'),
@@ -30,6 +44,7 @@ function enrico_register_post() {
   	'menu_position' => 5,
   	'supports'      => array( 'title','thumbnail','comments','excerpt',),
   	'rewrite' => array('slug' => 'enrico'),
+
   	);
 
   register_post_type( 'enrico', $args );
@@ -41,6 +56,5 @@ function enrico_register_post() {
       add_image_size('logotyp',620,270, true);
        }
 }
-
 
 ?>
