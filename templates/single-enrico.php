@@ -48,12 +48,18 @@ require 'enricomap.php';
 			            if(get_post_meta($post->ID, "enrico-facebook", true) !="")
 			            	echo "<a href ='" .get_post_meta($post->ID,'enrico-facebook',true)."' target='_blank'>Facebook</a> | ";
 			           	
-			           	if(get_post_meta($post->ID, "enrico-eniroId", true) !="")
-			            	echo "<a href ='http://kartor.eniro.se/?index=yp&id=" .get_post_meta($post->ID,'enrico-eniroId',true)."' target='_blank'>Vägbeskrivning</a>";
-			            
-			            if(get_post_meta($post->ID, "enrico-email", true) !="")
+			           	if(get_post_meta($post->ID, "enrico-email", true) !="")
 			            	echo " | <a href= 'mailto: ".get_post_meta($post->ID, 'enrico-email', true)."' 
 			            		target='_top' >email</a>";
+			            
+			            if(get_post_meta($post->ID, "enrico-countrycode", true) =="se"){
+			            	echo "<a href ='http://kartor.eniro.se/?index=yp&id=" .get_post_meta($post->ID,'enrico-eniroId',true)."' target='_blank'>Vägbeskrivning</a>";}
+			            
+			            elseif (get_post_meta($post->ID, "enrico-countrycode", true) =="dk"){
+			            	echo "<a href ='http://map.krak.dk/?index=yp&id=" .get_post_meta($post->ID,'enrico-eniroId',true)."' target='_blank'>Ruteplan</a>";}
+			            
+			            elseif (get_post_meta($post->ID, "enrico-countrycode", true) =="no"){
+			            	echo "<a href ='http://kart.gulesider.no/?index=yp&id=" .get_post_meta($post->ID,'enrico-eniroId',true)."' target='_blank'>Veibeskrivelse</a>";}
 			            ?>		
 			            </span></p>
 			

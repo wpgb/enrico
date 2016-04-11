@@ -14,6 +14,7 @@ require 'enrico_settings.php';
 require 'enrico_getdata.php';
 require 'enrico_taxonomy.php';
 require 'enrico_metaboxes.php';
+require 'enrico_admin_company_import.php';
 
 
 //Register custom post type "enrico"
@@ -25,7 +26,14 @@ add_action('save_post', 'update_enrico_post_meta', 10, 2);
 
 //Create options setting menu page
 add_action('admin_menu','enrico_settings_menu');
+add_action( 'admin_menu', 'enrico_admin_import_page' );
 add_action('admin_init','enrico_settings_register');
+
+// Page for Import
+add_action('admin_post_import_search_form_submit','enrico_import_run_search');
+add_action('admin_post_import_selected_perform','enrico_import_companies');
+
+
 
 //Settings for Custom template for enrico post type
 add_filter('template_include', 'enrico_template_include',1);
@@ -81,6 +89,9 @@ function get_custom_taxonomy_template($template_path){
         }   
    return $template_path;
     }
+
+
+
 
 
 ?>

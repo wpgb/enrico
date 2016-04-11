@@ -48,6 +48,10 @@ function enrico_details_metabox($post){
 if(!get_post_meta($post->ID, "enrico-auto-update" , true)){
          update_post_meta( $post->ID, 'enrico-auto-update','on' );}
 
+//Initialize Country Code se (Sweden) if not set yet        
+if(!get_post_meta($post->ID, "enrico-countrycode" , true)){
+         update_post_meta( $post->ID, 'enrico-countrycode','se' );}
+
       ?> 
      <div>
           <table class="form-table">
@@ -57,10 +61,20 @@ if(!get_post_meta($post->ID, "enrico-auto-update" , true)){
                         <td><input name="enrico-eniroId" type="text" size="25" placeholder="Please enter Eniro ID"
                                 value="<?php echo get_post_meta($post->ID, 'enrico-eniroId', true) ?>">
                         <input type="submit" value="Submit"></td>
+                
+                <tr valign="top">
+                    <th scope="row">Country Search: </th>        
+                	    
+	    		<td><input type="radio" name="enrico-countrycode" value="se" 
+	    		        <?php checked( 'se', get_post_meta($post->ID, "enrico-countrycode" , true) ); ?> /> Sweden (eniro.se)
+	  			<input type="radio" name="enrico-countrycode" value="no"
+	  			        <?php checked( 'no', get_post_meta($post->ID, "enrico-countrycode" , true) ); ?> /> Norway (gulesider.no)
+	  			<input type="radio" name="enrico-countrycode" value="dk"
+	  			        <?php checked( 'dk', get_post_meta($post->ID, "enrico-countrycode" , true) ); ?> /> Denmark (krak.dk)</td>
                         
                 
                 <tr valign="top">
-                    <th scope="row">About</th>
+                    <th scope="row">About<br><i>enter your own description</i></th>
                         <td>        
                             <?php $field_value = get_post_meta( $post->ID, 'enrico-about', false );
 
@@ -85,7 +99,7 @@ if(!get_post_meta($post->ID, "enrico-auto-update" , true)){
                         <?php checked( 'on', get_post_meta($post->ID, "enrico-auto-update" , true) ); ?> /> Update Eniroinfo  |  
                         
                         <input name="enrico-auto-update" type="radio" value="off"
-                        <?php checked( 'off', get_post_meta($post->ID, "enrico-auto-update" , true) ); ?> /> Don't</td>
+                        <?php checked( 'off', get_post_meta($post->ID, "enrico-auto-update" , true) ); ?> /> Don't update</td>
 
                 <?php //Loop through and display all the text fields below the Eniro ID with current value (if exists)
             
@@ -126,6 +140,8 @@ function update_enrico_post_meta($post_id,$post){
    
     update_post_meta( $post_id, 'enrico-auto-update', $_POST[ 'enrico-auto-update'] ) ;
     
+    //Save Country code 
+    update_post_meta( $post_id, 'enrico-countrycode', $_POST[ 'enrico-countrycode'] ) ;
     
     //Save the Eniro ID if set
     if( isset( $_POST[ 'enrico-eniroId' ] ) ) {
@@ -143,7 +159,7 @@ function update_enrico_post_meta($post_id,$post){
             update_post_meta( $post_id, $key, sanitize_text_field( $_POST[ $key] ) );
     }
    if(get_post_meta($post->ID, "enrico-auto-update" , true)=='on'){
-                $eniro_search_result = get_eniroinfo_single_post($post);}
+                $eniro_search_result = get_eniroinfo_single_ID($post);}
         else{ $eniro_search_result = NULL;}
 
     //If searchresult is returned:
@@ -151,7 +167,7 @@ function update_enrico_post_meta($post_id,$post){
     
         //Loop through and save all textfields returned from Eniro Search with new(?) value (if exists)
     
-         foreach ($eniro_search_result as $key => $value){
+         foreach ($eniro_search_result->res_row(0) as $key => $value){
                 if($value)
                     update_post_meta($post_id,'enrico-'.$key,$value);
                     
@@ -164,9 +180,9 @@ function update_enrico_post_meta($post_id,$post){
         //Update post title, slug and excerpt
         $post_args = array(
                         'ID' => $post_id,
-                        'post_title' => $eniro_search_result['companyName'],
-                        'post_name' => wp_unique_post_slug( $eniro_search_result['companyName'], $post_id, 'None', 'enrico', 'None'),
-                        'post_excerpt' => $eniro_search_result['companyText'],);
+                        'post_title' => $eniro_search_result->res_row(0)['companyName'],
+                        'post_name' => wp_unique_post_slug( $eniro_search_result->res_row(0)['companyName'], $post_id, 'None', 'enrico', 'None'),
+                        'post_excerpt' => $eniro_search_result->res_row(0)['companyText'],);
         
 
         //Needed to avoid endless loop from wp_update!

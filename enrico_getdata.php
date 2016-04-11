@@ -1,86 +1,39 @@
 <?php
 //Fetching company info through Eniro API
 
-function get_eniroinfo_single_post ($object){
+function get_eniroinfo_single_ID ($object){
+    
     
     $eniroID =  get_post_meta($object->ID, "enrico-eniroId", true);
-    $eniroGeoArea =  get_post_meta($object->ID, "enrico-postArea", true);
-    $eniroSearchWord =  get_the_title ($object);
     
-    $api_profile=get_option('enrico_api_profile');
-    $api_key=get_option('enrico_api_key');
-    $api_version =get_option('enrico_api_version');;
-    
-    $eniro_search_result=[];
-
-//Primarily use the eniro ID in the query -if exists
-    if ($eniroID !="")
-        $url = 'http://api.eniro.com/cs/search/basic?profile='.$api_profile.'&key='.$api_key.'&country=se&version='.$api_version.'&eniro_id='.$eniroID;
-
-//Otherwise use the Searchword(if exists)  and GeoArea (optional) in the query -if exists
-    
-    elseif ($eniroSearchWord !="")
-        $url = 'http://api.eniro.com/cs/search/basic?profile='.$api_profile.'&key='.$api_key.'&country=se&version='.$api_version.'&geo_area='.$eniroGeoArea.'&search_word='.$eniroSearchWord;
-    else return $eniro_search_result;
-    
-    $response = file_get_contents($url);
-    $json = json_decode($response, true);
-    
-    $hits = $json["totalHits"];
-    
-//    if ($hits ==0)
-//        return array(0, "");
+    if ($eniroID !=""){ //Check that Eniro-Id is provided- else don't execute query
         
-    if ($hits != 1){
-        echo "NO unique hit!";
+        //Required Parameters for the query-url
+        $country_code=   get_post_meta($object->ID, "enrico-countrycode", true);
+
+        $api_profile=get_option('enrico_api_profile');
+        $api_key=get_option('enrico_api_key');
+        $api_version =get_option('enrico_api_version');
+    
+    
+        $url = 'http://api.eniro.com/cs/search/basic?profile='.
+                    
+                    $api_profile.'&key='.$api_key.'&country='.$country_code.
+                        
+                        '&version='.$api_version.'&eniro_id='.$eniroID;
+        
+        $eniro_search_result=new EnricoQuery($url);
+        
+        if ($eniro_search_result->hits() != 1){  //Check that query has exactly 1 hit - else abort
+            return NULL;
+            }
+        
         return $eniro_search_result;
+            }
+    
+    else {
+        return NULL;
     }
+}
     
-    
-    //Debugging:
-    //echo "<p>".$eniroID.$eniroSearchWord. $eniroGeoArea."<br>Hits: ".$json["totalHits"]."</p>";    
-
-        foreach($json['adverts'] as $item) { 
-            
-            if ($item['phoneNumbers'] != Null)
-                $phone = $item['phoneNumbers'][0]['phoneNumber']; 
-            else $phone = "";
-            
-            if ($item['location']['coordinates'] != Null){
-                $latitude = $item['location']['coordinates'][0]['latitude'];
-                $longitude = $item['location']['coordinates'][0]['longitude'];
-                    }
-            else
-                $latitude = $longitude ="" ;
-            
-            
-                
-            $eniro_search_result =  array(
-                                    
-                                    'eniroId'  => $item['eniroId'],
-                                    'companyName' => $item['companyInfo']['companyName'],
-                                    'orgNumber' => $item['companyInfo']['orgNumber'],
-                                    'companyText' => $item['companyInfo']['companyText'],
-                                    'postBox' => $item['address']['postBox'],
-                                    'streetName' => $item['address']['streetName'],
-                                    'postCode' => $item['address']['postCode'],
-                                    'postArea' => $item['address']['postArea'],
-                                    'phoneNumber' => $phone,
-                                    'homepage' => $item['homepage'],
-                                    'facebook' => $item['facebook'],
-                                    'infoPageLink' => $item['infoPageLink'],
-                                    'latitude' => $latitude,
-                                    'longitude' => $longitude,
-                                    );
-            
-            
-        
-        
-        }
-   
-    
-    return $eniro_search_result;
-    }
-  
-  
 ?>

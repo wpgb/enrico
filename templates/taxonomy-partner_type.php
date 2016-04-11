@@ -2,6 +2,9 @@
 
 require 'enricomap.php';?>
 
+<h2><?php single_term_title('Listan av: '); ?></h2>
+
+
 
 		<?php if ( have_posts() ){ ?>
 			<?php
@@ -44,27 +47,29 @@ require 'enricomap.php';?>
 			           <br>
 				</div><!-- / div info -->
 		
-			<?php //Creating input for the Map script
-			$InfoBox='<strong>'.get_the_title($post).'</strong><br>'.
-        				get_post_meta($post->ID, 'enrico-streetName', true).'<br>'.
-        				get_post_meta($post->ID, 'enrico-postArea', true).'<br>'.
-        				'Lat: '.get_post_meta($post->ID, 'enrico-latitude', true).'<br>'.
-        				'  Long: '.get_post_meta($post->ID, 'enrico-longitude', true);
-        				
-        	
-			$locations[]=array($InfoBox,
-								get_post_meta($post->ID, 'enrico-latitude', true),
-								get_post_meta($post->ID,'enrico-longitude', true),
-								get_the_title($post),
-				);
-			$latitudes[]= get_post_meta($post->ID,'enrico-latitude', true);
-	    	$longitudes[]= get_post_meta($post->ID,'enrico-longitude', true);
-			// End the loop.
-			endwhile;
+							<?php //Creating input for the Map script (if post has Location data )
+							if (get_post_meta($post->ID, 'enrico-latitude', true) && get_post_meta($post->ID, 'enrico-longitude', true)){
+									$InfoBox='<strong>'.get_the_title($post).'</strong><br>'.
+						        				get_post_meta($post->ID, 'enrico-streetName', true).'<br>'.
+						        				get_post_meta($post->ID, 'enrico-postArea', true).'<br>'.
+						        				'Lat: '.get_post_meta($post->ID, 'enrico-latitude', true).'<br>'.
+						        				'  Long: '.get_post_meta($post->ID, 'enrico-longitude', true);
+						        				
+						        	
+									$locations[]=array($InfoBox,
+														get_post_meta($post->ID, 'enrico-latitude', true),
+														get_post_meta($post->ID,'enrico-longitude', true),
+														get_the_title($post),
+										);
+									$latitudes[]= get_post_meta($post->ID,'enrico-latitude', true);
+							    	$longitudes[]= get_post_meta($post->ID,'enrico-longitude', true);
+										}
+					// End the loop.
+					endwhile;
+		
+			
 
-	
-
-				}
+				
 				
 			the_posts_pagination( array(
 				'prev_text'          => 'Föregående sida',
@@ -113,6 +118,9 @@ require 'enricomap.php';?>
 
 <?php
 	enricomap_render($locations, $map_center_latitude, $map_center_longitude, $map_zoom );
+
+} //if have posts
+
 ?>
 	
 
