@@ -230,7 +230,9 @@ function enrico_import_companies(){
 	                                   
 	                                   	'enrico-latitude' => $eniro_search_result->res_row(0)['latitude'],
 	                                    
-	                                    'enrico-longitude' => $eniro_search_result->res_row(0)['longitude'])
+	                                    'enrico-longitude' => $eniro_search_result->res_row(0)['longitude'],
+	                                    
+	                                    'enrico-countrycode' => $_POST["import_country_".$i],)
 	                        
 	                       
 	             					) ;

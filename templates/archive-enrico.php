@@ -1,6 +1,8 @@
 <?php get_header(); 
 
-require 'enricomap.php';?>
+require 'enricomap.php';
+require 'EnricoLinks.class.php';
+?>
 
 
 		<?php if ( have_posts() ){ ?>
@@ -21,37 +23,20 @@ require 'enricomap.php';?>
 						echo get_post_meta($post->ID, "enrico-streetName", true)."<br>";
             			echo get_post_meta($post->ID, "enrico-postCode", true)."   ".get_post_meta($post->ID, "enrico-postArea", true)."<br>";
 			            echo "Tel: ".get_post_meta($post->ID, "enrico-phoneNumber", true)."<br>";
-			            ?>
 			            
-			            <span>
 			            
-			            <?php 
-			            if(get_post_meta($post->ID, "enrico-homepage", true) !="")
-			            	echo "<a href ='" .get_post_meta($post->ID,'enrico-homepage',true)."' target='_blank'>Hemsida</a> | ";
-			            	
-			            if(get_post_meta($post->ID, "enrico-facebook", true) !="")
-			            	echo "<a href ='" .get_post_meta($post->ID,'enrico-facebook',true)."' target='_blank'>Facebook</a> | ";
-			           	
-			           	if(get_post_meta($post->ID, "enrico-email", true) !="")
-			            	echo " | <a href= 'mailto: ".get_post_meta($post->ID, 'enrico-email', true)."' 
-			            		target='_top' >email</a>";
-			            
-			            if(get_post_meta($post->ID, "enrico-countrycode", true) =="se"){
-			            	echo "<a href ='http://kartor.eniro.se/?index=yp&id=" .get_post_meta($post->ID,'enrico-eniroId',true)."' target='_blank'>Vägbeskrivning</a>";}
-			            
-			            elseif (get_post_meta($post->ID, "enrico-countrycode", true) =="dk"){
-			            	echo "<a href ='http://map.krak.dk/?index=yp&id=" .get_post_meta($post->ID,'enrico-eniroId',true)."' target='_blank'>Ruteplan</a>";}
-			            
-			            elseif (get_post_meta($post->ID, "enrico-countrycode", true) =="no"){
-			            	echo "<a href ='http://kart.gulesider.no/?index=yp&id=" .get_post_meta($post->ID,'enrico-eniroId',true)."' target='_blank'>Veibeskrivelse</a>";}
-			            ?>			
-			            </span></p>
+			            $links= new EnricoLinks($post);
+						echo $links->get_links();
+							?>
 			           
-			           <br>
+			           		<br>
 				</div><!-- / div info -->
 		
-			<?php //Creating input for the Map script
-			if (get_post_meta($post->ID, 'enrico-latitude', true) && get_post_meta($post->ID, 'enrico-longitude', true)){
+			<?php //Creating input for the Map script-if preferred map is not 'none' and post have latitude and longitude values
+			if (get_post_meta($post->ID, 'enrico-latitude', true) 
+					&& get_post_meta($post->ID, 'enrico-longitude', true)
+						&& get_option( 'enrico_map_preferredMap' )!='none'){ 
+							
 						$InfoBox='<strong>'.get_the_title($post).'</strong><br>'.
 			        				get_post_meta($post->ID, 'enrico-streetName', true).'<br>'.
 			        				get_post_meta($post->ID, 'enrico-postArea', true).'<br>'.
@@ -84,7 +69,9 @@ require 'enricomap.php';?>
 
 		
 		
-	<?php //Calculate Map Center and Zoom
+	<?php //Calculate Map Center and Zoom- if preferred map is not 'none'
+	
+	if(get_option( 'enrico_map_preferredMap' )!='none'){
 		
 		$map_center_latitude=(max($latitudes)+min($latitudes))/2;
 		$map_center_longitude=(max($longitudes)+min($longitudes))/2;
@@ -121,8 +108,7 @@ require 'enricomap.php';?>
 
 <?php
 	enricomap_render($locations, $map_center_latitude, $map_center_longitude, $map_zoom );
-
-
+} //endif preferred map not 'none'
 } //if have posts?>
 	
 

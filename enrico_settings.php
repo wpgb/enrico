@@ -25,7 +25,7 @@ function enrico_settings_page(){
        do_settings_sections( 'enrico_settings_group' );
        
        if(!get_option( 'enrico_map_preferredMap' )){
-           udate_option('enrico_map_preferredMap','eniro',true);
+           add_option('enrico_map_preferredMap','eniro');
        }
        
        
@@ -60,7 +60,12 @@ function enrico_settings_page(){
             
             
             <input name="enrico_map_preferredMap" type="radio" value="google" 
-                        <?php checked( 'google', get_option( 'enrico_map_preferredMap' ) ); ?> /> GoogleMap</td>
+                        <?php checked( 'google', get_option( 'enrico_map_preferredMap' ) ); ?> /> GoogleMap<br>
+                        
+            <input name="enrico_map_preferredMap" type="radio" value="none" 
+                        <?php checked( 'none', get_option( 'enrico_map_preferredMap' ) ); ?> /> None</td>
+                        
+                      
             
 
         </tr>

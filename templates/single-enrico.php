@@ -1,6 +1,7 @@
 <?php get_header();
 
 require 'enricomap.php';
+require 'EnricoLinks.class.php'
 
 ?>
 
@@ -39,68 +40,51 @@ require 'enricomap.php';
                			<p>Telefon:  <?php echo get_post_meta($post->ID, 'enrico-phoneNumber', true);?><br>
                         
 						Länkar:<br>
-						<span>
-			            
-			           <?php 
-			            if(get_post_meta($post->ID, "enrico-homepage", true) !="")
-			            	echo "<a href ='" .get_post_meta($post->ID,'enrico-homepage',true)."' target='_blank'>Hemsida</a> | ";
-			            	
-			            if(get_post_meta($post->ID, "enrico-facebook", true) !="")
-			            	echo "<a href ='" .get_post_meta($post->ID,'enrico-facebook',true)."' target='_blank'>Facebook</a> | ";
-			           	
-			           	if(get_post_meta($post->ID, "enrico-email", true) !="")
-			            	echo " | <a href= 'mailto: ".get_post_meta($post->ID, 'enrico-email', true)."' 
-			            		target='_top' >email</a>";
-			            
-			            if(get_post_meta($post->ID, "enrico-countrycode", true) =="se"){
-			            	echo "<a href ='http://kartor.eniro.se/?index=yp&id=" .get_post_meta($post->ID,'enrico-eniroId',true)."' target='_blank'>Vägbeskrivning</a>";}
-			            
-			            elseif (get_post_meta($post->ID, "enrico-countrycode", true) =="dk"){
-			            	echo "<a href ='http://map.krak.dk/?index=yp&id=" .get_post_meta($post->ID,'enrico-eniroId',true)."' target='_blank'>Ruteplan</a>";}
-			            
-			            elseif (get_post_meta($post->ID, "enrico-countrycode", true) =="no"){
-			            	echo "<a href ='http://kart.gulesider.no/?index=yp&id=" .get_post_meta($post->ID,'enrico-eniroId',true)."' target='_blank'>Veibeskrivelse</a>";}
-			            ?>		
-			            </span></p>
-			
+
+						<?php
+						$links= new EnricoLinks($post);
+						echo $links->get_links();
+							?>
 			
   </div><!-- col-md-8 -->
 		
 		
-        <?php
-        //Input for the map:
+        <?php //Creating input for the Map script-if preferred map is not 'none' and post have latitude and longitude values
+			if (get_post_meta($post->ID, 'enrico-latitude', true) 
+					&& get_post_meta($post->ID, 'enrico-longitude', true)
+						&& get_option( 'enrico_map_preferredMap' )!='none'){
         
-        	$InfoBox='<strong>'.get_the_title($post).'</strong><br>'.
-        				get_post_meta($post->ID, 'enrico-streetName', true).'<br>'.
-        				get_post_meta($post->ID, 'enrico-postArea', true).'<br>';
-        	
-        	
-        	$locations =array();
-        	
-        	$locations[]=array($InfoBox,
-								get_post_meta($post->ID, 'enrico-latitude', true),
-								get_post_meta($post->ID,'enrico-longitude', true),
-								get_the_title($post),
-							);			
-        				
-        	
-        	$map_center_latitude = get_post_meta($post->ID, 'enrico-latitude', true);
-        	
-        	$map_center_longitude = get_post_meta($post->ID,'enrico-longitude', true);
-			
-			$map_zoom=11
-		
-		//The Map:?>
-		
-		<div id="enricomapdiv" class="enricomap-single"></div>
-  
+		        	$InfoBox='<strong>'.get_the_title($post).'</strong><br>'.
+		        				get_post_meta($post->ID, 'enrico-streetName', true).'<br>'.
+		        				get_post_meta($post->ID, 'enrico-postArea', true).'<br>';
+		        	
+		        	
+		        	$locations =array();
+		        	
+		        	$locations[]=array($InfoBox,
+										get_post_meta($post->ID, 'enrico-latitude', true),
+										get_post_meta($post->ID,'enrico-longitude', true),
+										get_the_title($post),
+									);			
+		        				
+		        	
+		        	$map_center_latitude = get_post_meta($post->ID, 'enrico-latitude', true);
+		        	
+		        	$map_center_longitude = get_post_meta($post->ID,'enrico-longitude', true);
+					
+					$map_zoom=11
+				
+				//The Map:?>
+				
+				<div id="enricomapdiv" class="enricomap-single"></div>
+		  
 
   
-<?php 
-	
-	enricomap_render($locations, $map_center_latitude, $map_center_longitude, $map_zoom );
-		 
-?>
+				<?php 
+					
+					enricomap_render($locations, $map_center_latitude, $map_center_longitude, $map_zoom );
+		}//endif map	 
+				?>
   </div><!-- row --> 
 </div><!-- .content-area -->
 
