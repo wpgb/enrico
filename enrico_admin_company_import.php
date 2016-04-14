@@ -102,9 +102,7 @@ function enrico_import_run_search(){
 		<form  action="admin-post.php" method="post" >
 			
 			<?php 
-			$i=0;
-			
-			while ($eniro_search_result->res_row($i)){
+			for ($i = 0; $i < $eniro_search_result->hits(); $i++){
 				?>
 				
 				<?php 
@@ -122,7 +120,7 @@ function enrico_import_run_search(){
 					
 					.$eniro_search_result->res_row($i)['postArea'].'<br>';
 				
-				$i++;
+			
 			}
 			
   	?>	
@@ -166,79 +164,12 @@ function enrico_import_companies(){
         
         	$eniro_search_result=new EnricoQuery($url);
         
-	        if ($eniro_search_result->hits() != 1){  //Check that query has exactly 1 hit - else skip
-	           		continue;
-	            		}
-	        $qargs = array(
-							'post_type' => array( 'enrico'),
-							'meta_query' => array(  //(array) - Custom field parameters (available with Version 3.1).
-       												array(
-												       		'key' => 'enrico-eniroId',                  
-												         	'value' => $eniro_search_result->res_row(0)['eniroId'],                 
-												         	'type' => 'CHAR',                  
-													         'compare' => '=',                
-												    						 ),											
-       												
-													 ),
-							'posts_per_page' => -1,
-							
-							);
-
-
-			$query = new WP_Query( $qargs );
-
+	        $eniro_search_result->insert_post_all();
+	        
+	        
+	       
 			
-        	if(!$query->have_posts()){//Only if NOT duplicate-possibly data update could be added in ELSE statement for existing post....
-			
-				
-	            $postarr = array(
-	             			'ID' => "",
-	             			
-	             			'post_type' => 'enrico',
-	                        
-	                        'post_title' => $eniro_search_result->res_row(0)['companyName'],
-	                        
-	                        'post_name' => wp_unique_post_slug( $eniro_search_result->res_row(0)['companyName'],'None', 'None', 'enrico', 'None'),
-	              
-	                        
-	                        'post_excerpt' =>  $eniro_search_result->res_row(0)['companyText'],
-	                        
-	                         'meta_input' => array(
-	                        		    'enrico-eniroId'  => $eniro_search_result->res_row(0)['eniroId'],	
-	                        		    
-	                        			'enrico-companyName' => $eniro_search_result->res_row(0)['companyName'],
-
-                                        'enrico-orgNumber' => $eniro_search_result->res_row(0)['orgNumber'],
-
-                                        'enrico-companyText' => $eniro_search_result->res_row(0)['companyText'],
-	                                    
-	                                    'enrico-postBox' => $eniro_search_result->res_row(0)['postBox'],
-	                                    
-	                                    'enrico-streetName' => $eniro_search_result->res_row(0)['streetName'],
-	                                    
-	                                    'enrico-postCode' => $eniro_search_result->res_row(0)['postCode'],
-	                                    
-	                                    'enrico-postArea' => $eniro_search_result->res_row(0)['postArea'],
-	                                    
-	                                    'enrico-phoneNumber' => $eniro_search_result->res_row(0)['phoneNumber'],
-	                                    
-	                                    'enrico-homepage' => $eniro_search_result->res_row(0)['homepage'],
-	                                    
-	                                    'enrico-facebook' => $eniro_search_result->res_row(0)['facebook'],
-	                                    
-	                                    'enrico-infoPageLink' => $eniro_search_result->res_row(0)['infoPageLink'],
-	                                   
-	                                   	'enrico-latitude' => $eniro_search_result->res_row(0)['latitude'],
-	                                    
-	                                    'enrico-longitude' => $eniro_search_result->res_row(0)['longitude'],
-	                                    
-	                                    'enrico-countrycode' => $_POST["import_country_".$i],)
-	                        
-	                       
-	             					) ;
-	             wp_insert_post( $postarr, 'false' );
-	             
-             	}	
+        	
 
 		
 		}

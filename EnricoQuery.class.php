@@ -52,6 +52,7 @@ class EnricoQuery{
                                     'infoPageLink' => $item['infoPageLink'],
                                     'latitude' => $latitude,
                                     'longitude' => $longitude,
+                                    'countrycode' => $this->CountryCode,
                                     );
             
             $this->QueryResults[]=  $eniro_search_result  ;    
@@ -70,13 +71,13 @@ class EnricoQuery{
     }
     
     
-    public function row_in_db($i){
+    public function row_in_db($hit_row){
                $qargs = array(
 							'post_type' => array( 'enrico'),
 							'meta_query' => array(  //(array) - Custom field parameters (available with Version 3.1).
        												array(
 												       		'key' => 'enrico-eniroId',                  
-												         	'value' => $this->res_row($i)['eniroId'],                 
+												         	'value' => $hit_row['eniroId'],                 
 												         	'type' => 'CHAR',                  
 													         'compare' => '=',                
 												    						 ),											
@@ -89,58 +90,58 @@ class EnricoQuery{
 				$query = new WP_Query( $qargs );
 
 			
-        	    if(!$query->have_posts()){
+        	    if($query->have_posts()){
         	        return true;
         	    }
         	    
         	    else return false;
     }
     
-    public function insert_post_row($i){
+    public function insert_post_row($hit_row){
         
-        if( !$this->row_in_db($i)){
-                
+        var_dump( $this->row_in_db($hit_row));
+        if( !$this->row_in_db($hit_row)){       
 				
 	            $postarr = array(
 	             			'ID' => "",
 	             			
 	             			'post_type' => 'enrico',
 	                        
-	                        'post_title' => $this->res_row($i)['companyName'],
+	                        'post_title' => $hit_row['companyName'],
 	                        
-	                        'post_name' => wp_unique_post_slug( $this->res_row($i)['companyName'],'None', 'None', 'enrico', 'None'),
+	                        'post_name' => wp_unique_post_slug( $hit_row['companyName'],'None', 'None', 'enrico', 'None'),
 	              
 	                        
-	                        'post_excerpt' =>  $this->res_row($i)['companyText'],
+	                        'post_excerpt' =>  $hit_row['companyText'],
 	                        
 	                         'meta_input' => array(
-	                        		    'enrico-eniroId'  => $this->res_row($i)['eniroId'],	
+	                        		    'enrico-eniroId'  => $hit_row['eniroId'],	
 	                        		    
-	                        			'enrico-companyName' => $this->res_row($i)['companyName'],
+	                        			'enrico-companyName' => $hit_row['companyName'],
 
-                                        'enrico-orgNumber' => $this->res_row($i)['orgNumber'],
+                                        'enrico-orgNumber' => $hit_row['orgNumber'],
 
-                                        'enrico-companyText' => $this->res_row($i)['companyText'],
+                                        'enrico-companyText' => $hit_row['companyText'],
 	                                    
-	                                    'enrico-postBox' => $this->res_row($i)['postBox'],
+	                                    'enrico-postBox' => $hit_row['postBox'],
 	                                    
-	                                    'enrico-streetName' => $this->res_row($i)['streetName'],
+	                                    'enrico-streetName' => $hit_row['streetName'],
 	                                    
-	                                    'enrico-postCode' => $this->res_row($i)['postCode'],
+	                                    'enrico-postCode' => $hit_row['postCode'],
 	                                    
-	                                    'enrico-postArea' => $this->res_row($i)['postArea'],
+	                                    'enrico-postArea' => $hit_row['postArea'],
 	                                    
-	                                    'enrico-phoneNumber' => $this->res_row($i)['phoneNumber'],
+	                                    'enrico-phoneNumber' => $hit_row['phoneNumber'],
 	                                    
-	                                    'enrico-homepage' => $this->res_row($i)['homepage'],
+	                                    'enrico-homepage' => $hit_row['homepage'],
 	                                    
-	                                    'enrico-facebook' => $this->res_row($i)['facebook'],
+	                                    'enrico-facebook' => $hit_row['facebook'],
 	                                    
-	                                    'enrico-infoPageLink' => $this->res_row($i)['infoPageLink'],
+	                                    'enrico-infoPageLink' => $hit_row['infoPageLink'],
 	                                   
-	                                   	'enrico-latitude' => $this->res_row($i)['latitude'],
+	                                   	'enrico-latitude' => $hit_row['latitude'],
 	                                    
-	                                    'enrico-longitude' => $this->res_row($i)['longitude'],
+	                                    'enrico-longitude' => $hit_row['longitude'],
 	                                    
 	                                    'enrico-countrycode' => $this->CountryCode,)
 	                        
@@ -149,7 +150,7 @@ class EnricoQuery{
 	             wp_insert_post( $postarr, 'false' );
 	             
         
-                }
+}
             return;
         }
 
@@ -157,9 +158,10 @@ class EnricoQuery{
     
     public function insert_post_all(){
         
-        foreach($this->QueryResults as $hit) {
+        foreach($this->QueryResults as $hit_row) {
             
-            $this->insert_post_row($hit);
+           $this->insert_post_row($hit_row);
+//var_dump($hit_row);
         }
         return;
         

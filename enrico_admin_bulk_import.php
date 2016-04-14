@@ -129,7 +129,6 @@ function enrico_bulk_import_run(){
 			
    //	wp_safe_redirect(admin_url('edit.php?post_type=enrico'));exit;
 echo 'hits '.$eniro_search_result->hits().'<br>'.$_POST["max_results"].'<br>';
-
-		echo '#queries' .$number_of_queries;		
+		
 	}
 ?>
