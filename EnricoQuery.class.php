@@ -8,11 +8,12 @@ class EnricoQuery{
     
     public function __construct($url){
         
-        $string=parse_str(parse_url($url, PHP_URL_QUERY), $array);
+        parse_str(parse_url($url, PHP_URL_QUERY),$args);
         
-        $this->CountryCode = $string['country'];
+        $this->CountryCode = $args['country'];
         
         $response = file_get_contents($url);
+        
         $this->json = json_decode($response, true);
         
         $this->QueryResults=array();
@@ -97,9 +98,9 @@ class EnricoQuery{
         	    else return false;
     }
     
-    public function insert_post_row($hit_row){
+    public function insert_post_row($hit_row,$status,$partner_cat){
         
-        var_dump( $this->row_in_db($hit_row));
+        
         if( !$this->row_in_db($hit_row)){       
 				
 	            $postarr = array(
@@ -110,9 +111,15 @@ class EnricoQuery{
 	                        'post_title' => $hit_row['companyName'],
 	                        
 	                        'post_name' => wp_unique_post_slug( $hit_row['companyName'],'None', 'None', 'enrico', 'None'),
-	              
 	                        
+	                        'post_status' => $status,
+	              
 	                        'post_excerpt' =>  $hit_row['companyText'],
+	                        
+	                        'tax_input' => array(
+	                                    'partner_type' => $partner_cat,
+	                                        ),
+	                                    
 	                        
 	                         'meta_input' => array(
 	                        		    'enrico-eniroId'  => $hit_row['eniroId'],	
@@ -146,7 +153,9 @@ class EnricoQuery{
 	                                    'enrico-countrycode' => $this->CountryCode,)
 	                        
 	             					) ;
-	             
+	
+	 
+	 
 	             wp_insert_post( $postarr, 'false' );
 	             
         
@@ -156,12 +165,12 @@ class EnricoQuery{
 
     
     
-    public function insert_post_all(){
+    public function insert_post_all($status,$partner_cat){
         
         foreach($this->QueryResults as $hit_row) {
             
-           $this->insert_post_row($hit_row);
-//var_dump($hit_row);
+           $this->insert_post_row($hit_row,$status,$partner_cat);
+
         }
         return;
         

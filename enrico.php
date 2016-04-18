@@ -15,7 +15,7 @@ require 'enrico_getdata.php';
 require 'enrico_taxonomy.php';
 require 'enrico_metaboxes.php';
 require 'enrico_admin_company_import.php';
-require 'enrico_admin_bulk_import.php';
+
 
 
 //Register custom post type "enrico"
@@ -29,14 +29,22 @@ add_action('save_post', 'update_enrico_post_meta', 10, 2);
 add_action('admin_menu','enrico_settings_menu');
 add_action( 'admin_menu', 'enrico_admin_import_page' );
 add_action('admin_init','enrico_settings_register');
-add_action( 'admin_menu', 'enrico_admin_bulk_import_page' );
+
 
 
 // Page for Import
 add_action('admin_post_import_search_form_submit','enrico_import_run_search');
-add_action('admin_post_import_selected_perform','enrico_import_companies');
-add_action('admin_post_bulk_import_run','enrico_bulk_import_run');
+add_action('admin_post_import_selected_perform','enrico_import_companies_selected');
 
+//Session 
+add_action('init', 'enricoStartSession', 1);
+add_action('wp_logout', 'enricoEndSession');
+add_action('wp_login', 'enricoEndSession');
+
+
+//Admin panel for custom post type enrico
+add_filter('manage_enrico_posts_columns' , 'enrico_cpt_columns');
+add_action( 'manage_enrico_posts_custom_column' , 'custom_enrico_column', 10, 2 );
 
 
 //Settings for Custom template for enrico post type
@@ -94,8 +102,70 @@ function get_custom_taxonomy_template($template_path){
    return $template_path;
     }
 
+//Setup PHP Session
+function enricoStartSession() {
+    if(!session_id()) {
+        session_start();
+    }
+}
+
+//Kill PHP Session
+function enricoEndSession() {
+    session_destroy ();
+}
 
 
+//Admin Custom Post Table setup
 
+function enrico_cpt_columns($columns){
+    
+                $columns['phoneNumber'] = "Phone";
+                
+                $columns['email'] = "Email";
+                
+                $columns['streetName'] = 'Address';
+                
+                $columns['partner_type'] = 'Partner Categories';
+                
+                $columns['countrycode'] = "Country";
+                
+                $columns['postArea'] = 'City';
+                
+                return $columns;
+                
+            }
+
+function custom_enrico_column( $column, $post_id ) {
+    switch ( $column ) {
+
+        case 'partner_type' :
+            $terms = get_the_term_list( $post_id , 'partner_type' , '' , ',' , '' );
+            if ( is_string( $terms ) )
+                echo $terms;
+                break;
+         
+         case 'streetName' :
+            echo get_post_meta( $post_id , 'enrico-streetName' , true ); 
+            break;   
+
+        case 'postArea' :
+            echo get_post_meta( $post_id , 'enrico-postArea' , true ); 
+            break;
+            
+        case 'countrycode' :
+            echo get_post_meta( $post_id , 'enrico-countrycode' , true ); 
+            break;
+        
+        case 'phoneNumber' :
+            echo get_post_meta( $post_id , 'enrico-phoneNumber' , true ); 
+            break;
+            
+        case 'email' :
+            echo get_post_meta( $post_id , 'enrico-email' , true ); 
+            break;
+            
+            
+    }
+}
 
 ?>

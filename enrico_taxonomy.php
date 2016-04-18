@@ -14,7 +14,7 @@ function enrico_register_post() {
         'partner_type',
         'enrico',
         array(
-            'label' => 'Partners Directory',
+            'label' => 'Partner Categories',
             'singular_label' => 'Partner',
             'hierarchical' => true,
             'query_var' => true,
