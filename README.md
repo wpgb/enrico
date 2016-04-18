@@ -1,7 +1,13 @@
 # enrico
-Wordpress plugin using Eniro API to register companies contact information- and then present this company information together with a map location (Eniromap or Googlemap depending o the preferred choice)
+This is a Wordpress plugin utilising Eniro's API to build your own directory of companies.
 
-Eniro api key and profile needed to make this work Google map key not needed.
+Eniro's company directory information ("Company search - basic") is imported- and can be supplemented with your own
+information and categorization to customize your own company directory.
+
+Basic templates to browse the company directory and present the output on a map is included (Eniromap or Googlemap depending on the preferred choice)
+
+Eniro api key and profile si needed to make all this magic work!
+
 Pls register for eniro api key here:
 http://api.eniro.com/
 
