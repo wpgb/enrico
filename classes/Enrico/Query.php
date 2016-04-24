@@ -1,6 +1,6 @@
 <?php
 
-class EnricoQuery{
+class Enrico_Query{
     
     private $json;
     private $QueryResults;

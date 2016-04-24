@@ -1,7 +1,7 @@
 <?php get_header(); 
 
 require_once 'enricomap.php';
-require_once 'EnricoLinks.class.php';
+
 ?>
 <h2><?php single_term_title('Listan av: '); ?></h2>
 
@@ -27,7 +27,7 @@ require_once 'EnricoLinks.class.php';
             			echo get_post_meta($post->ID, "enrico-postCode", true)."   ".get_post_meta($post->ID, "enrico-postArea", true)."<br>";
 			            echo "Tel: ".get_post_meta($post->ID, "enrico-phoneNumber", true)."<br>";
 			        
-						$links= new EnricoLinks($post);
+						$links= new Enrico_Links($post);
 						echo $links->get_links();
 							?>
 			           

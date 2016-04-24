@@ -1,8 +1,7 @@
 <?php get_header();
 
 require_once 'enricomap.php';
-require_once 'EnricoLinks.class.php';
-require_once 'EnricoMap.class.php';
+
 
 ?>
 
@@ -43,7 +42,7 @@ require_once 'EnricoMap.class.php';
 						Länkar:<br>
 
 						<?php
-						$links= new EnricoLinks($post);
+						$links= new Enrico_Links($post);
 						echo $links->get_links();
 							?>
 			

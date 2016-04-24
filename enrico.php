@@ -10,6 +10,17 @@ License: GPL
 Copyright: Gabor Bellak
 */
 
+spl_autoload_register( 'enrico_autoloader' );
+
+function enrico_autoloader( $class_name ) {
+  if ( false !== strpos( $class_name, 'Enrico' ) ) {
+    $classes_dir = realpath( plugin_dir_path( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR;
+    $class_file = str_replace( '_', DIRECTORY_SEPARATOR, $class_name ) . '.php';
+    require_once $classes_dir . $class_file;
+  }
+}
+
+
 require 'enrico_settings.php';
 require 'enrico_getdata.php';
 require 'enrico_taxonomy.php';

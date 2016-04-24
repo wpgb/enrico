@@ -1,6 +1,4 @@
 <?php
-require('EnricoQuery.class.php');
-
 
 function enrico_admin_import_page(){
     	add_submenu_page('edit.php?post_type=enrico', 'EnricoImport', 'Enrico Import', 
@@ -146,7 +144,7 @@ function enrico_import_run_search(){
                         
                         
         
-        $enrico_search_result=new EnricoQuery($url);
+        $enrico_search_result=new Enrico_Query($url);
         
         if($_POST['enrico_import_interactive']== "true"){
         
@@ -239,7 +237,7 @@ function enrico_import_run_search(){
 															;
 					
 					
-								$enrico_search_result=new EnricoQuery($url);
+								$enrico_search_result=new Enrico_Query($url);
 								
 								$enrico_search_result->insert_post_all($_POST['status'],$_POST['partner_cat']);
 															}

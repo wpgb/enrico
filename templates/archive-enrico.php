@@ -1,8 +1,7 @@
 <?php get_header(); 
 
 require_once 'enricomap.php';
-require_once 'EnricoLinks.class.php';
-require_once 'MapTest.class.php';
+
 
 ?>
 
@@ -27,7 +26,7 @@ require_once 'MapTest.class.php';
 			            echo "Tel: ".get_post_meta($post->ID, "enrico-phoneNumber", true)."<br>";
 			            
 			            
-			            $links= new EnricoLinks($post);
+			            $links= new Enrico_Links($post);
 						echo $links->get_links();
 							?>
 			           

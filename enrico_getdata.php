@@ -22,7 +22,7 @@ function get_eniroinfo_single_ID ($object){
                         
                         '&version='.$api_version.'&eniro_id='.$eniroID;
         
-        $eniro_search_result=new EnricoQuery($url);
+        $eniro_search_result=new Enrico_Query($url);
         
         if ($eniro_search_result->hits() != 1){  //Check that query has exactly 1 hit - else abort
             return NULL;

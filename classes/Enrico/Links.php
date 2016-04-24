@@ -1,6 +1,6 @@
 <?php
 
-class EnricoLinks{
+class Enrico_Links{
     
     private $links_html;
     
