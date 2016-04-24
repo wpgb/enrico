@@ -1,7 +1,9 @@
 <?php get_header(); 
 
-require 'enricomap.php';
-require 'EnricoLinks.class.php';
+require_once 'enricomap.php';
+require_once 'EnricoLinks.class.php';
+require_once 'MapTest.class.php';
+
 ?>
 
 
@@ -55,9 +57,7 @@ require 'EnricoLinks.class.php';
 			// End the loop.
 			endwhile;
 
-	
-
-				
+			
 				
 			the_posts_pagination( array(
 				'prev_text'          => 'Föregående sida',
@@ -65,6 +65,8 @@ require 'EnricoLinks.class.php';
 				'before_page_number' => '<span class="meta-nav screen-reader-text">'. 'Sida'.' </span>',
 			) );
 			
+	
+	
 			?>
 
 		
@@ -103,12 +105,18 @@ require 'EnricoLinks.class.php';
 		$map_zoom = min ($map_zoom_lat,$map_zoom_long );
 
 		
+		
+		
 ?>
-	<div id="enricomapdiv" class="enricomap-multi"></div>
+<div id="enricomapdiv" class="enricomap-multi"></div>
+	
 
 <?php
-	enricomap_render($locations, $map_center_latitude, $map_center_longitude, $map_zoom );
-} //endif preferred map not 'none'
+
+enricomap_render($locations, $map_center_latitude, $map_center_longitude, $map_zoom );
+
+		
+	} //endif preferred map not 'none'
 } //if have posts?>
 	
 

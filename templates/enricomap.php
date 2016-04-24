@@ -4,7 +4,7 @@ function enricomap_render($locations, $map_center_latitude, $map_center_longitud
 
 	if(get_option( 'enrico_map_preferredMap' )=='google'){ //If Google map?>
 
-		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&callback=InitMap"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&callback=InitGoogleMap"></script>
 		
 		<script type="text/javascript">
 		//Google Map

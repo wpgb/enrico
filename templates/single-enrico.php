@@ -1,7 +1,8 @@
 <?php get_header();
 
-require 'enricomap.php';
-require 'EnricoLinks.class.php'
+require_once 'enricomap.php';
+require_once 'EnricoLinks.class.php';
+require_once 'EnricoMap.class.php';
 
 ?>
 
@@ -73,6 +74,8 @@ require 'EnricoLinks.class.php'
 		        	$map_center_longitude = get_post_meta($post->ID,'enrico-longitude', true);
 					
 					$map_zoom=11
+					
+				
 				
 				//The Map:?>
 				

@@ -1,7 +1,7 @@
 <?php get_header(); 
 
-require 'enricomap.php';
-require 'EnricoLinks.class.php';
+require_once 'enricomap.php';
+require_once 'EnricoLinks.class.php';
 ?>
 <h2><?php single_term_title('Listan av: '); ?></h2>
 
