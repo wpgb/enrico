@@ -64,12 +64,24 @@ add_filter('template_include', 'enrico_template_include',1);
 add_filter( 'taxonomy_template', 'get_custom_taxonomy_template' );
 
 //Add Stylesheet for the plugin
-add_action( 'wp_enqueue_scripts', 'enrico_add_stylesheet' );
+add_action( 'wp_enqueue_scripts', 'enrico_add_scripts' );
 
 
 
-function enrico_add_stylesheet() {
+function enrico_add_scripts() {
         wp_enqueue_style( 'enrico-style', plugins_url('/css/enrico-style.css', __FILE__) );
+        wp_enqueue_script('enrico-scripts', plugins_url( '/js/enrico-scripts.js', __FILE__ ));
+        
+        if(get_option( 'enrico_map_preferredMap' )=='google'){
+                wp_enqueue_script('google-maps', "https://maps.googleapis.com/maps/api/js?key=".get_option("enrico_googleapi_key")."&callback=initMap");
+                    }
+      
+        if(get_option( 'enrico_map_preferredMap' )=='eniro'){
+            //javascript source to cover both http and https requests
+                wp_enqueue_script('eniro-maps', "http://kartor.eniro.se/rs/eniro.js?partnerId=".get_option("enrico_map_partnerId")."&profile=se");
+                wp_enqueue_script('eniro-maps-https', "https://map.eniro.no/rs/eniro.js?partnerId=".get_option("enrico_map_partnerId")."&profile=se&https");
+                    }
+        
     }
     
 
