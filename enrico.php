@@ -10,6 +10,7 @@ License: GPL
 Copyright: Gabor Bellak
 */
 
+//Autoloader to load classes - needs to follow the naming convention used  e.g Enrico_Query, in file /classes/Enrico/Query
 spl_autoload_register( 'enrico_autoloader' );
 
 function enrico_autoloader( $class_name ) {
@@ -21,11 +22,11 @@ function enrico_autoloader( $class_name ) {
 }
 
 
-require 'enrico_settings.php';
-require 'enrico_getdata.php';
-require 'enrico_taxonomy.php';
-require 'enrico_metaboxes.php';
-require 'enrico_admin_company_import.php';
+require_once plugin_dir_path( __FILE__ ).'/adminpages/enrico_settings.php';
+require_once plugin_dir_path( __FILE__ ).'/includes/enrico_getdata.php';
+require_once plugin_dir_path( __FILE__ ).'/adminpages/enrico_taxonomy.php';
+require_once plugin_dir_path( __FILE__ ).'/adminpages/enrico_metaboxes.php';
+require_once plugin_dir_path( __FILE__ ).'/adminpages/enrico_admin_company_import.php';
 
 
 
