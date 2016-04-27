@@ -1,22 +1,9 @@
-<?php
+// JavaScript File
 
-function enricomap_render($locations, $map_center_latitude, $map_center_longitude, $map_zoom ){
-
-	if(get_option( 'enrico_map_preferredMap' )=='google'){ //If Google map?>
-
-		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&callback=InitGoogleMap"></script>
-		
-		<script type="text/javascript">
-		//Google Map
-		function InitGoogleMap() {
-			
-			var locations = <?php echo json_encode($locations)?>;
-			
-			var mapDiv = document.getElementById('enricomapdiv');
-			
-		    var mapOptions = {
-		        center: new google.maps.LatLng(<?php echo $map_center_latitude;?>,<?php echo $map_center_longitude;?>),
-		        zoom: <?php echo $map_zoom;?>,
+function initGoogleMap() {
+    var mapOptions = {
+		        center: new google.maps.LatLng(LatLong[0],LatLong[1]),
+		        zoom: zoom,
 		        mapTypeControl: false,
 		      	zoomControl: true,
 		      	scaleControl: false,
@@ -49,36 +36,17 @@ function enricomap_render($locations, $map_center_latitude, $map_center_longitud
 		        })(marker,i));  
 		    
 		    }
-		    
-	
-		} //end of function InitGoogleMap
-	  
-	  InitGoogleMap()
-	 </script>
-			
-			                
-<?php 						}	//"Endif " GFoogle Map?>
+     
+  
+}
 
 
-<?php 
 
-if(get_option( 'enrico_map_preferredMap' )=='eniro'){ //If Eniro map is preferred ?>
-			
-	<!-- javascript to cover both http and https requests -->
-	<script type="text/javascript" src="http://kartor.eniro.se/rs/eniro.js?partnerId=<?php echo get_option("enrico_map_partnerId");?>&profile=se"></script>
-	<script type="text/javascript" src="https://map.eniro.no/rs/eniro.js?partnerId=<?php echo get_option("enrico_map_partnerId");?>&profile=se&https"></script>
-
-	<script type="text/javascript">
-	//Eniro Map setup
-	function InitEniroMap() {
-	    var mapDiv = document.getElementById('enricomapdiv');
-	    
-	    var locations = <?php echo json_encode($locations)?>;
-	    
+function initEniroMap() {
 	    
 	   	var mapOptions = {
-	        center: new eniro.maps.LatLng(<?php echo $map_center_latitude;?>,<?php echo $map_center_longitude;?>),
-	        zoom: <?php echo $map_zoom;?>,
+	        center: new eniro.maps.LatLng(LatLong[0],LatLong[1]),
+	        zoom: zoom,
 	        mapTypeControl: false,
 	        mapTypeId: eniro.maps.MapTypeId.MAP,  // [AERIAL/HYBRID/MAP (=default)/NAUTICAL]
 	        zoomControl: true,
@@ -111,12 +79,3 @@ if(get_option( 'enrico_map_preferredMap' )=='eniro'){ //If Eniro map is preferre
 	   myEniroMap.setFocus(true); 
 	   
 	    }
-	
-		
-	
-		InitEniroMap()
-	 	</script>
-<?php 						
-}      //"Endif" EniroMap   
-}
-?> 

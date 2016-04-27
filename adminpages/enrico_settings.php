@@ -6,6 +6,7 @@ function enrico_settings_register(){
     register_setting ('enrico_settings_group','enrico_api_key');
     register_setting ('enrico_settings_group','enrico_api_version');
     register_setting ('enrico_settings_group','enrico_map_partnerId');
+    register_setting ('enrico_settings_group','enrico_googleapi_key');
     register_setting ('enrico_settings_group','enrico_map_preferredMap');
 }
 function enrico_settings_menu(){
@@ -50,6 +51,11 @@ function enrico_settings_page(){
         <tr valign="top">
         <th scope="row">Eniro Maps Partner ID: </th>
         <td><input name="enrico_map_partnerId" type="text" value="<?php echo get_option("enrico_map_partnerId");?>" /></td>
+        </tr>
+        
+        <tr valign="top">
+        <th scope="row">Google Maps API key: </th>
+        <td><input name="enrico_googleapi_key" size="50" type="text" value="<?php echo get_option("enrico_googleapi_key");?>" /></td>
         </tr>
         
         <tr valign="top">

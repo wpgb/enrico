@@ -1,6 +1,15 @@
 <?php get_header();
 
-require_once 'enricomap.php';
+
+
+if(get_option( 'enrico_map_preferredMap' )!='none'){
+			
+						$pagemap = new Enrico_Map; //Initialize a map object for the page
+						
+	
+						$pagemap->add_post($post);
+				}
+	
 
 
 ?>
@@ -13,80 +22,72 @@ require_once 'enricomap.php';
 			<div  class="enrico-singlepost-info" >
 
 			
-			<h2><?php echo get_the_title($post);?></h2>
-
-			
-			
-
-
-			<p><?php echo the_excerpt($post);?></p>
-			
-			<?php echo get_post_meta($post->ID, 'enrico-about', true);?><br>
-                        <p>Adress: <br>
-                        <?php echo get_post_meta($post->ID, 'enrico-streetName', true);?><br>
-			
-				
-		                <?php if (get_post_meta($post->ID, 'enrico-postBox', true)){?>
-					                Postbox:  <?php echo get_post_meta($post->ID, 'enrico-postBox', true);?><br>
-				                  
-				         			<?php  } ?>     
+				<h2><?php echo get_the_title($post);?></h2>
 	
-		                <?php echo get_post_meta($post->ID, 'enrico-postCode', true);?><br>
-		                    </tr>
-                 
-                		<strong><?php echo get_post_meta($post->ID, 'enrico-postArea', true);?></strong></p>
-                 
-                    
-               			<p>Telefon:  <?php echo get_post_meta($post->ID, 'enrico-phoneNumber', true);?><br>
-                        
-						Länkar:<br>
+				
+				<p><?php echo the_excerpt($post);?></p>
+				
+				<?php echo get_post_meta($post->ID, 'enrico-about', true);?><br>
+	                        
+                <p>Adress: <br>
+                <?php echo get_post_meta($post->ID, 'enrico-streetName', true);?><br>
+	
+		
+                <?php if (get_post_meta($post->ID, 'enrico-postBox', true)){?>
+			                Postbox:  <?php echo get_post_meta($post->ID, 'enrico-postBox', true);?><br>
+		                  
+		         			<?php  } ?>     
 
-						<?php
-						$links= new Enrico_Links($post);
-						echo $links->get_links();
-							?>
+                <?php echo get_post_meta($post->ID, 'enrico-postCode', true);?><br>
+                    </tr>
+         
+        		<strong><?php echo get_post_meta($post->ID, 'enrico-postArea', true);?></strong></p>
+         
+            
+       			<p>Telefon:  <?php echo get_post_meta($post->ID, 'enrico-phoneNumber', true);?><br>
+                
+				Länkar:<br>
+
+				<?php
+				$links= new Enrico_Links($post);
+				echo $links->get_links();
+					?>
+				
+	  		</div><!-- single post -->
+		
+		
+        <?php 
+        	if($pagemap){		
+						?>
+
+			    <div id="enricomapdiv" class="enricomap-single" ></div>
+			     
+			    <script>
+			    var mapDiv = document.getElementById('enricomapdiv');
+			    var locations = <?php echo json_encode($pagemap->get_Locations());?>;  
+			    var zoom = <?php echo $pagemap->get_Zoom();?>;
+			    var LatLong = <?php echo json_encode($pagemap->get_LatLong());?>;
+			    </script>
 			
-  </div><!-- col-md-8 -->
+				<?php
+				
+				if(get_option( 'enrico_map_preferredMap' )=='google'){ ?>
+					
+					<script>
+						 	initGoogleMap();
+			    	</script>
+			<?php				
+					}elseif(get_option( 'enrico_map_preferredMap' )=='eniro'){ ?>
+					
+					   	<script>
+						 	initEniroMap();
+			    		</script>
+			<?php
+					}
+			}
+		?>
 		
 		
-        <?php //Creating input for the Map script-if preferred map is not 'none' and post have latitude and longitude values
-			if (get_post_meta($post->ID, 'enrico-latitude', true) 
-					&& get_post_meta($post->ID, 'enrico-longitude', true)
-						&& get_option( 'enrico_map_preferredMap' )!='none'){
-        
-		        	$InfoBox='<strong>'.get_the_title($post).'</strong><br>'.
-		        				get_post_meta($post->ID, 'enrico-streetName', true).'<br>'.
-		        				get_post_meta($post->ID, 'enrico-postArea', true).'<br>';
-		        	
-		        	
-		        	$locations =array();
-		        	
-		        	$locations[]=array($InfoBox,
-										get_post_meta($post->ID, 'enrico-latitude', true),
-										get_post_meta($post->ID,'enrico-longitude', true),
-										get_the_title($post),
-									);			
-		        				
-		        	
-		        	$map_center_latitude = get_post_meta($post->ID, 'enrico-latitude', true);
-		        	
-		        	$map_center_longitude = get_post_meta($post->ID,'enrico-longitude', true);
-					
-					$map_zoom=11
-					
-				
-				
-				//The Map:?>
-				
-				<div id="enricomapdiv" class="enricomap-single"></div>
-		  
-
-  
-				<?php 
-					
-					enricomap_render($locations, $map_center_latitude, $map_center_longitude, $map_zoom );
-		}//endif map	 
-				?>
   </div><!-- row --> 
 </div><!-- .content-area -->
 
