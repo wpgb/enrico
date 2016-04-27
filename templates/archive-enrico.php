@@ -4,7 +4,11 @@
 
  	if ( have_posts() ){ 
 			
-			$pagemap = new Enrico_Map;
+			if(get_option( 'enrico_map_preferredMap' )!='none'){
+			
+				$pagemap = new Enrico_Map; //Initialize a map object for the page
+			}
+			
 			
 			// Start the Loop.
 			while ( have_posts() ) : the_post(); ?>
@@ -28,23 +32,26 @@
 		
 			<?php 
 			
-				$pagemap->add_post($post);
+				if($pagemap){
+					
+					$pagemap->add_post($post);
+				}
 			
 			
 			endwhile;   // End the loop.
 
 			
 				
-			the_posts_pagination( array(
-				'prev_text'          => 'Föregående sida',
-				'next_text'          => 'Nästa sida',
-				'before_page_number' => '<span class="meta-nav screen-reader-text">'. 'Sida'.' </span>',
-			) ); 
+	the_posts_pagination( array(
+		'prev_text'          => 'Föregående sida',
+		'next_text'          => 'Nästa sida',
+		'before_page_number' => '<span class="meta-nav screen-reader-text">'. 'Sida'.' </span>',
+	) ); 
 			
 					
 
 	
-	if(get_option( 'enrico_map_preferredMap' )!='none'){ 		
+	if($pagemap){		
 						?>
 
 			    <div id="enricomapdiv" class="enricomap-multi" ></div>
