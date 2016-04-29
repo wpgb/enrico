@@ -82,4 +82,5 @@
 
 } //if have posts?>	
 
+<?php get_sidebar(); ?>
 <?php get_footer(); ?>

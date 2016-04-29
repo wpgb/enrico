@@ -23,5 +23,11 @@ Installation:
 2. Activate Enrico in your Admin plugins dashboard
 3. Go to Settings/Enrico and enter your Eniro API credentials (Register for free API key from https://api.eniro.com/ if you don't have this yet)
 4. In the Settings page you can select which map service you prefer Eniro or Google Maps (or possibly None) 
-5. Go to Enrico Directory and start adding companies, either one by one if you already know the Eniro-ID of the company, or via the Import panel
+5. Go to Enrico Directory and add custom categories (e.g. Resellers, Suppliers, Customers)
+6. Go to Enrico Directory and start adding companies, either one by one if you already know the Eniro-ID of the company, or via the Import panel
+7. Once you have published some companies chek if the enrico templates are working:
+            - YOUR URL/enrico/ ...should show you a list of all your companies
+            - YOUR URL/YOUR CATEGORYSLUG/ ...should show you a list of all your companies in a CATEGORY
+            - Clicking on a single entry should lin k to a single post page
+            - Known issue: You may need to deactivate/reactivate other plugins for WP to find the enrico templates.
 

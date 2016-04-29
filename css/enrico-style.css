@@ -5,27 +5,29 @@
 }
 
 .enricomap-single {
-    height: 500px; 
-    width:50%; 
-    float:left;
-    border: 1px solid black;
+    height: 300px; 
+    width:40%; 
+    float:right;
+    
+    
 }
 
 .enricomap-multi {
     height: 600px; 
-    width:90%; 
+    width:50%; 
     border: 1px solid black;
 
     
 }
 
 .enrico-singlepost-info {
-    width:50%; 
+    width:60%; 
     height: 500px;
     float:left;  
     margin: 0px;
   	padding: 20px;
-  	border: 1px solid black;
+  	
+  	
 }
 
 .enrico-multipost-info {
@@ -34,3 +36,12 @@
   	padding: 10px;
   	border: 1px solid black;
 }
+
+.enrico-content-area {
+    width:100%; 
+    margin: 0px;
+  	padding: 10px;
+  	border: 1px solid red;
+}
+
+

@@ -76,7 +76,9 @@ if(!get_post_meta($post->ID, "enrico-countrycode" , true)){
                 <tr valign="top">
                     <th scope="row">About<br><i>enter your own description</i></th>
                         <td>        
-                            <?php $field_value = get_post_meta( $post->ID, 'enrico-about', false );
+                            <?php 
+                                
+                                $about = get_post_meta( $post->ID, 'enrico-about', true );
 
                       // Settings that we'll pass to wp_editor
                       $args = array (
@@ -87,7 +89,9 @@ if(!get_post_meta($post->ID, "enrico-countrycode" , true)){
                             'teeny' => true,
                             
                       );
-                      wp_editor( $field_value[0], 'enrico-about', $args ); ?>
+                      wp_editor( $about, 'enrico-about', $args );
+                      
+                      ?>
   
   
 </td></tr>

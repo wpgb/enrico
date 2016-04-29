@@ -15,10 +15,16 @@ if(get_option( 'enrico_map_preferredMap' )!='none'){
 ?>
 
 
-	<div id="primary" class="enrico-content-area">
+	<div id="primary" class="content-area" >
+		<?php
+				if($pagemap){		
+						?>
+
 		
-		<div class ="row" >
-			
+			    <div id="enricomapdiv" class="enricomap-single" ></div>
+		<?php		    
+			    }
+			?>
 			<div  class="enrico-singlepost-info" >
 
 			
@@ -53,14 +59,11 @@ if(get_option( 'enrico_map_preferredMap' )!='none'){
 				echo $links->get_links();
 					?>
 				
-	  		</div><!-- single post -->
+	  		
+			
 		
-		
-        <?php 
-        	if($pagemap){		
-						?>
-
-			    <div id="enricomapdiv" class="enricomap-single" ></div>
+       
+        
 			     
 			    <script>
 			    var mapDiv = document.getElementById('enricomapdiv');
@@ -84,12 +87,13 @@ if(get_option( 'enrico_map_preferredMap' )!='none'){
 			    		</script>
 			<?php
 					}
-			}
+			
 		?>
 		
-		
-  </div><!-- row --> 
+
+ 
+</div>
 </div><!-- .content-area -->
 
-
+<?php get_sidebar(); ?>
 <?php get_footer(); ?>
