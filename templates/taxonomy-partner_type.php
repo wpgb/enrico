@@ -1,8 +1,29 @@
 <?php get_header(); 
 
+$queried_object = get_queried_object();
+$queried_taxonomy = get_taxonomy( $queried_object->taxonomy);
 
-?>
-<h2><?php single_term_title('Listan av: '); ?></h2>
+
+ ?>
+
+<form role="search" method="get" class="search-form"
+			
+			action="<?php echo esc_url( home_url('/'.$queried_taxonomy->rewrite['slug'].'/'.$queried_object->slug)); ?>">
+	
+	
+	
+
+			
+			<input type="search" 
+						placeholder="<?php echo single_term_title('Sök bland '); ?>" 
+							value="<?php echo get_search_query(); ?>" name="s" 
+								 >
+		
+	<button type="submit" >Sök</button></button>
+</form>
+<br>
+
+
 
 
 

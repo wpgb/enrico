@@ -63,6 +63,7 @@ add_action( 'manage_enrico_posts_custom_column' , 'custom_enrico_column', 10, 2 
 add_filter('template_include', 'enrico_template_include',1);
 add_filter( 'taxonomy_template', 'get_custom_taxonomy_template' );
 
+
 //Add Stylesheet for the plugin
 add_action( 'wp_enqueue_scripts', 'enrico_add_scripts' );
 
@@ -84,6 +85,15 @@ function enrico_add_scripts() {
         
     }
     
+function enrico_search_form($template_path) {
+        global $wp_query;
+        
+  
+        if( $wp_query->is_search && $wp_query->partner_type ) {
+               $template_path = plugin_dir_path(__FILE__).'/templates/MySearch.php';
+              }
+    return $template_path;
+        }
 
 function enrico_template_include($template_path){
    if ( is_post_type_archive('enrico') ){
@@ -95,11 +105,33 @@ function enrico_template_include($template_path){
                 $template_path = plugin_dir_path(__FILE__).'/templates/archive-enrico.php';
             }
     }
+    
+    //check if is search for partner type taxonomy- alternatively if it's the enrico archive
+    elseif (is_search()){
+        $queried_object = get_queried_object();
+        if ($queried_object->taxonomy =="partner_type" && $queried_object->slug ){
+            
+            if ($theme_file = locate_template (array('taxonomy-partner_type.php'))){
+                $template_path = $theme_file;
+                    }
+            else {
+                $template_path = plugin_dir_path(__FILE__).'/templates/taxonomy-partner_type.php';
+                     }
+        }
+        
+        elseif(get_post_type()=='enrico'){
+            if ($theme_file = locate_template (array('archive-enrico.php'))){
+                $template_path = $theme_file;
+            }
+            else {
+                $template_path = plugin_dir_path(__FILE__).'/templates/archive-enrico.php';
+            }
+        }
+    }
    
-   
-    //check if post type and single post
-    elseif( get_post_type()=='enrico'){
-        if( is_single() ){
+    //check if single post and  post type enrico
+    elseif( is_single() && get_post_type()=='enrico'){
+        
             if ($theme_file = locate_template (array('single-enrico.php'))){
                 $template_path = $theme_file;
             }
@@ -107,11 +139,10 @@ function enrico_template_include($template_path){
                 $template_path = plugin_dir_path(__FILE__).'/templates/single-enrico.php';
             }
                 
-            }
-            
-        }
+    }
     
-    return $template_path;
+ 
+return $template_path;   
     }
 
 function get_custom_taxonomy_template($template_path){

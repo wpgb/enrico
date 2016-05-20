@@ -20,6 +20,9 @@ class Enrico_Links{
 			            		$this->links_html .=  " | <a href= 'mailto: ".get_post_meta($post->ID, 'enrico-email', true)."' 
 			            		target='_top' >email</a>";
 			            
+			            if(get_post_meta($post->ID, "enrico-infoPageLink", true) !="")
+			            		$this->links_html .=  "<a href ='" .get_post_meta($post->ID,'enrico-infoPageLink',true)."' target='_blank'>InfoPage</a> | ";
+			            
 			            if (get_post_meta($post->ID, 'enrico-latitude', true) && get_post_meta($post->ID, 'enrico-longitude', true)){
 			                
 			                    if(get_option( 'enrico_map_preferredMap' )=='google'){ //If Google map
@@ -41,6 +44,10 @@ class Enrico_Links{
 			            
 			            	
                             }
+                           
+                         
+			            		
+			            		
                         $this->links_html .= "</span>";
             }
             

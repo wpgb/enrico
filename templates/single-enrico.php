@@ -29,14 +29,15 @@ if(get_option( 'enrico_map_preferredMap' )!='none'){
 
 			
 				<h2><?php echo get_the_title($post);?></h2>
+				<p><i>Org.nr: <?php echo get_post_meta($post->ID, 'enrico-orgNumber', true);?></i></p>
 	
 				
-				<p><?php echo the_excerpt($post);?></p>
+				<p><i><?php echo the_excerpt($post);?></i></p>
 				
 				<?php echo get_post_meta($post->ID, 'enrico-about', true);?><br>
 	                        
-                <p>Adress: <br>
-                <?php echo get_post_meta($post->ID, 'enrico-streetName', true);?><br>
+                <h4>Adress: </h4>
+                <p><?php echo get_post_meta($post->ID, 'enrico-streetName', true);?><br>
 	
 		
                 <?php if (get_post_meta($post->ID, 'enrico-postBox', true)){?>
@@ -49,10 +50,11 @@ if(get_option( 'enrico_map_preferredMap' )!='none'){
          
         		<strong><?php echo get_post_meta($post->ID, 'enrico-postArea', true);?></strong></p>
          
-            
-       			<p>Telefon:  <?php echo get_post_meta($post->ID, 'enrico-phoneNumber', true);?><br>
+            	<h4>Telefon:</h4>
+       			<p><?php echo get_post_meta($post->ID, 'enrico-phoneNumber', true);?><br>
                 
-				Länkar:<br>
+                <h4>Länkar:</h4>
+				
 
 				<?php
 				$links= new Enrico_Links($post);

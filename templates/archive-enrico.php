@@ -1,7 +1,23 @@
-<?php get_header(); 
+<?php get_header(); ?>
+
+<form role="search" method="get" class="search-form" 
+			
+			action="<?php echo esc_url( home_url('/enrico/')); ?>"
+	
+		<label>
+		
+			
+			<input type="search" 
+						placeholder="<?php echo single_term_title('Sök bland '); ?>" 
+							value="<?php echo get_search_query(); ?>" name="s" 
+								 />
+		</label>
+	<button type="submit" class="search-submit"><span class="screen-reader-text"><?php echo _x( 'Search', 'submit button', 'twentysixteen' ); ?></span></button>
+</form>
+<br>
 
 
-
+<?php
  	if ( have_posts() ){ 
 			
 			if(get_option( 'enrico_map_preferredMap' )!='none'){
