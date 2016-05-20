@@ -1,18 +1,18 @@
 <?php get_header(); ?>
+<div id="primary" class="enrico-content-area" >
 
 <form role="search" method="get" class="search-form" 
 			
-			action="<?php echo esc_url( home_url('/enrico/')); ?>"
+			action="<?php echo esc_url( home_url('/enrico/')); ?>">
 	
-		<label>
-		
+
 			
-			<input type="search" 
+			<input type="search" class="enrico-search-field"
 						placeholder="<?php echo single_term_title('Sök bland '); ?>" 
 							value="<?php echo get_search_query(); ?>" name="s" 
 								 />
-		</label>
-	<button type="submit" class="search-submit"><span class="screen-reader-text"><?php echo _x( 'Search', 'submit button', 'twentysixteen' ); ?></span></button>
+	
+			<button type="submit" class="enrico-search-submit"></button>
 </form>
 <br>
 
@@ -97,6 +97,8 @@
 	}	
 
 } //if have posts?>
+
+</div>
 	
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

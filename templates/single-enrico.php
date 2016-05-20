@@ -15,7 +15,7 @@ if(get_option( 'enrico_map_preferredMap' )!='none'){
 ?>
 
 
-	<div id="primary" class="content-area" >
+	<div id="primary" class="enrico-content-area" >
 		<?php
 				if($pagemap){		
 						?>

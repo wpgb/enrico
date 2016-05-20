@@ -5,21 +5,20 @@ $queried_taxonomy = get_taxonomy( $queried_object->taxonomy);
 
 
  ?>
-
+<div id="primary" class="enrico-content-area" >
+	
 <form role="search" method="get" class="search-form"
 			
 			action="<?php echo esc_url( home_url('/'.$queried_taxonomy->rewrite['slug'].'/'.$queried_object->slug)); ?>">
 	
-	
-	
-
 			
-			<input type="search" 
+			<input type="search" class="enrico-search-field"
 						placeholder="<?php echo single_term_title('Sök bland '); ?>" 
 							value="<?php echo get_search_query(); ?>" name="s" 
 								 >
 		
-	<button type="submit" >Sök</button></button>
+			<button type="submit" class="enrico-search-submit"></button>
+
 </form>
 <br>
 
@@ -102,6 +101,6 @@ $queried_taxonomy = get_taxonomy( $queried_object->taxonomy);
 	}	
 
 } //if have posts?>	
-
+</div>
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

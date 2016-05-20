@@ -14,14 +14,14 @@
 
 .enricomap-multi {
     height: 600px; 
-    width:50%; 
-    border: 1px solid black;
+    width:100%; 
+    
 
     
 }
 
 .enrico-singlepost-info {
-    width:60%; 
+    width:50%; 
     height: 500px;
     float:left;  
     margin: 0px;
@@ -31,17 +31,64 @@
 }
 
 .enrico-multipost-info {
-    width:50%; 
-    margin: 0px;
-  	padding: 10px;
-  	border: 1px solid black;
-}
-
-.enrico-content-area {
     width:100%; 
     margin: 0px;
   	padding: 10px;
-  	border: 1px solid red;
+  	
 }
 
+.enrico-content-area {
+    float: left;
+	margin-right: -100%;
+	width: 70%;
+  	padding: 10px;
+}
+
+input[type="search"].enrico-search-field {
+	border-radius: 2px 0 0 2px;
+	width: -webkit-calc(100% - 42px);
+	width: calc(100% - 42px);
+}
+
+
+.enrico-search-submit:before {
+	content: "\f400";
+	font-size: 24px;
+	left: 2px;
+	line-height: 42px;
+	position: relative;
+	width: 40px;
+}
+
+.enrico-search-submit {
+	border-radius: 0 2px 2px 0;
+	bottom: 0;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 42px;
+}
+
+
+/**
+ * Genericons
+ */
+.enrico-search-submit:before {
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	display: inline-block;
+	font-family: "Genericons";
+	font-size: 24px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	line-height: 1;
+	speak: none;
+	text-align: center;
+	text-decoration: inherit;
+	text-transform: none;
+	vertical-align: top;
+}
 
