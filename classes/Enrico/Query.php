@@ -20,9 +20,27 @@ class Enrico_Query{
         
         foreach($this->json['adverts'] as $item) { 
             
+            $phone = ""; $phone_mob = ""; $phone_fax = "";
+            
             if ($item['phoneNumbers'] != Null)
-                $phone = $item['phoneNumbers'][0]['phoneNumber']; 
-            else $phone = "";
+                
+                foreach($item['phoneNumbers'] as $number){
+                    
+                    switch($number['type']){
+                        case 'std':
+                            $phone = $number['phoneNumber'];
+                            break;
+                        
+                        case 'mob':
+                            $phone_mob = $number['phoneNumber'];
+                            break;
+                            
+                        case 'fax':
+                            $phone_fax = $number['phoneNumber'];
+                            break;
+                    }
+                }
+
             
             if ($item['location']['coordinates'] != Null){
                 $latitude = $item['location']['coordinates'][0]['latitude'];
@@ -48,6 +66,8 @@ class Enrico_Query{
                                     'postCode' => $item['address']['postCode'],
                                     'postArea' => $item['address']['postArea'],
                                     'phoneNumber' => $phone,
+                                    'mobileNumber' => $phone_mob,
+                                    'faxNumber' => $phone_fax,
                                     'homepage' => $item['homepage'],
                                     'facebook' => $item['facebook'],
                                     'infoPageLink' => $item['infoPageLink'],

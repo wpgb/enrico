@@ -18,7 +18,7 @@ class Enrico_Links{
 			           	
 			           	if(get_post_meta($post->ID, "enrico-email", true) !="")
 			            		$this->links_html .=  " | <a href= 'mailto: ".get_post_meta($post->ID, 'enrico-email', true)."' 
-			            		target='_top' >email</a>";
+			            		target='_top' >email</a> | ";
 			            
 			            if(get_post_meta($post->ID, "enrico-infoPageLink", true) !="")
 			            		$this->links_html .=  "<a href ='" .get_post_meta($post->ID,'enrico-infoPageLink',true)."' target='_blank'>InfoPage</a> | ";

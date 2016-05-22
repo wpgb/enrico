@@ -50,9 +50,15 @@ if(get_option( 'enrico_map_preferredMap' )!='none'){
          
         		<strong><?php echo get_post_meta($post->ID, 'enrico-postArea', true);?></strong></p>
          
-            	<h4>Telefon:</h4>
-       			<p><?php echo get_post_meta($post->ID, 'enrico-phoneNumber', true);?><br>
-                
+            	<h4>Kontakt:</h4>
+       			<p>Tel: <?php echo get_post_meta($post->ID, 'enrico-phoneNumber', true);?><br>
+       			Mobile: <?php echo get_post_meta($post->ID, 'enrico-mobileNumber', true);?><br>
+       			Fax: <?php echo get_post_meta($post->ID, 'enrico-faxNumber', true);?><br>
+       			
+       			Email: <a href= 'mailto: <?php echo get_post_meta($post->ID, 'enrico-email', true);?>' 
+			            		target='_top' ><?php echo get_post_meta($post->ID, 'enrico-email', true);?></a>
+       			
+       			
                 <h4>Länkar:</h4>
 				
 

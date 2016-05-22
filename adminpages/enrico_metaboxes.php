@@ -21,6 +21,10 @@ $GLOBALS['enrico_text_fields'] = array(
    
     'enrico-phoneNumber' => array( 'Phone', 'tel','size="50"'), //Do not change the value!
     
+    'enrico-mobileNumber' => array( 'Mobile', 'tel','size="50"'), //Do not change the value!
+    
+    'enrico-faxNumber' => array( 'Fax', 'tel','size="50"'), //Do not change the value!
+    
     'enrico-orgNumber' => array( 'Org Number', 'text','size="50"'), //Do not change the value!
     
     'enrico-homepage' => array( 'Web Page', 'url','size="50"'), //Do not change the value!
