@@ -1,13 +1,16 @@
 #enricomapdiv {
-    margin: 0px;
+    margin-top: 20px;
 	padding: 0px;
+	
 	
 }
 
 .enricomap-single {
-    height: 300px; 
-    width:40%; 
+    
+    height: 400px; 
+    width:100%; 
     float:right;
+    
     
     
 }
@@ -21,26 +24,27 @@
 }
 
 .enrico-singlepost-info {
-    width:50%; 
+    width:100%; 
     height: 500px;
-    float:left;  
-    margin: 0px;
-  	padding: 20px;
+  
+    margin-top: 20px;
+  	padding: 0px;
   	
   	
 }
 
 .enrico-multipost-info {
     width:100%; 
-    margin: 0px;
-  	padding: 10px;
+    margin-bottom: 20px;
+  	padding: 0px;
+
   	
 }
 
 .enrico-content-area {
     float: left;
-	margin-right: -100%;
-	width: 70%;
+	
+	width: 100%;
   	padding: 10px;
 }
 
@@ -71,6 +75,16 @@ input[type="search"].enrico-search-field {
 	width: 42px;
 }
 
+
+.post-navigation .meta-nav {
+	color: #686868;
+	font-size: 13px;
+	font-size: 0.8125rem;
+	letter-spacing: 0.076923077em;
+	line-height: 1.6153846154;
+	margin-bottom: 0.5384615385em;
+	text-transform: uppercase;
+}
 
 /**
  * Genericons

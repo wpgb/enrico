@@ -8,6 +8,8 @@ function enrico_settings_register(){
     register_setting ('enrico_settings_group','enrico_map_partnerId');
     register_setting ('enrico_settings_group','enrico_googleapi_key');
     register_setting ('enrico_settings_group','enrico_map_preferredMap');
+    register_setting ('enrico_settings_group','enrico_map_marker_logo');
+    register_setting ('enrico_settings_group','enrico_map_marker_logo_width');
 }
 function enrico_settings_menu(){
 add_options_page('Company Settings Page','Enrico','administrator',__FILE__,'enrico_settings_page');
@@ -71,7 +73,15 @@ function enrico_settings_page(){
             <input name="enrico_map_preferredMap" type="radio" value="none" 
                         <?php checked( 'none', get_option( 'enrico_map_preferredMap' ) ); ?> /> None</td>
                         
-                      
+        <tr valign="top">
+        <th scope="row">Map Marker Logo:</th>
+        <td><input name="enrico_map_marker_logo" size="50" type="url" value="<?php echo get_option("enrico_map_marker_logo");?>" />(link to .jpg or .png file)</td>
+        </tr>              
+            
+        <tr valign="top">
+        <th scope="row">Marker Logo Width:</th>
+        <td><input name="enrico_map_marker_logo_width" size="10" type="number" min="10" max="500" value="<?php echo get_option("enrico_map_marker_logo_width");?>" /> px</td>
+        </tr>                  
             
 
         </tr>

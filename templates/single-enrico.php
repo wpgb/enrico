@@ -65,6 +65,7 @@ if(get_option( 'enrico_map_preferredMap' )!='none'){
 				<?php
 				$links= new Enrico_Links($post);
 				echo $links->get_links();
+					
 					?>
 				
 	  		
