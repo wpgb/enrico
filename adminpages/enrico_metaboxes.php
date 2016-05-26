@@ -11,21 +11,22 @@ function enrico_meta_box_add($post) {
 
 // defininng the input fields in the Meta box (label,input type,extra attributes- leave empty string "" if not needed)
 $GLOBALS['enrico_text_fields'] = array(
+    
     'enrico-streetName' => array('Street Name', 'text','size="50"'),//Do not change the value!
    
-    'enrico-postBox' => array('Post Box', 'text','size="50"'), //Do not change the value!
+    'enrico-postBox' => array('Post Box', 'text','size="50"  '), //Do not change the value!
     
-    'enrico-postCode' => array( 'Post Code', 'text','size="50"'), //Do not change the value!
+    'enrico-postCode' => array( 'Post Code', 'text','size="50" '), //Do not change the value!
     
-    'enrico-postArea' => array( 'Post Area', 'text','size="50"'), //Do not change the value!
+    'enrico-postArea' => array( 'Post Area', 'text','size="50" '), //Do not change the value!
    
     'enrico-phoneNumber' => array( 'Phone', 'tel','size="50"'), //Do not change the value!
     
-    'enrico-mobileNumber' => array( 'Mobile', 'tel','size="50"'), //Do not change the value!
+    'enrico-mobileNumber' => array( 'Mobile', 'tel','size="50" '), //Do not change the value!
     
-    'enrico-faxNumber' => array( 'Fax', 'tel','size="50"'), //Do not change the value!
+    'enrico-faxNumber' => array( 'Fax', 'tel','size="50" '), //Do not change the value!
     
-    'enrico-orgNumber' => array( 'Org Number', 'text','size="50"'), //Do not change the value!
+    'enrico-orgNumber' => array( 'Org Number', 'text','size="50" '), //Do not change the value!
     
     'enrico-homepage' => array( 'Web Page', 'url','size="50"'), //Do not change the value!
     
@@ -35,7 +36,7 @@ $GLOBALS['enrico_text_fields'] = array(
    
     'enrico-longitude' => array( 'Longitude', 'number','size="50" step="any"'), //Do not change the value!
     
-    'enrico-infoPageLink' => array( 'Infopage','url','size="50"'), //Do not change the value!
+    'enrico-infoPageLink' => array( 'Eniro page','url','size="50"'), //Do not change the value!
    
     'enrico-email' =>array( 'Email', 'email','size="50"'),
     
@@ -62,7 +63,7 @@ if(!get_post_meta($post->ID, "enrico-countrycode" , true)){
                
                 <tr valign="top">
                     <th scope="row">Eniro ID</th>
-                        <td><input name="enrico-eniroId" type="text" size="25" placeholder="Please enter Eniro ID"
+                        <td><input name="enrico-eniroId" type="text" size="25" style="border:3px dashed #F7730E" placeholder="Please enter Eniro ID"
                                 value="<?php echo get_post_meta($post->ID, 'enrico-eniroId', true) ?>">
                         <input type="submit" value="Submit"></td>
                 

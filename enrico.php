@@ -67,6 +67,9 @@ add_filter( 'taxonomy_template', 'get_custom_taxonomy_template' );
 //Add Stylesheet for the plugin
 add_action( 'wp_enqueue_scripts', 'enrico_add_scripts' );
 
+//Using pre get posts to alter number of posts for enrico archive pages/taxonomy pages
+add_action( 'pre_get_posts', 'enrico_archive_pagesize', 1 );
+
 
 
 function enrico_add_scripts() {
@@ -223,4 +226,18 @@ function custom_enrico_column( $column, $post_id ) {
     }
 }
 
+function enrico_archive_pagesize( $query ) {
+    if ( is_admin() || ! $query->is_main_query() )
+        return;
+
+    if ( is_post_type_archive( 'enrico' ) || is_tax( 'partner_type')) {
+        // Display X posts for the custom post type called 'enrico' OR 'partner_type' taxonomy
+        $query->set( 'posts_per_page', get_option("enrico_archive_posts_per_page") );
+        // Display only 
+        $query->set( 'post_status','publish');
+        return;
+    }
+    
+    
+}
 ?>

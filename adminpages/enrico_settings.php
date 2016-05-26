@@ -10,6 +10,7 @@ function enrico_settings_register(){
     register_setting ('enrico_settings_group','enrico_map_preferredMap');
     register_setting ('enrico_settings_group','enrico_map_marker_logo');
     register_setting ('enrico_settings_group','enrico_map_marker_logo_width');
+    register_setting ('enrico_settings_group','enrico_archive_posts_per_page');
 }
 function enrico_settings_menu(){
 add_options_page('Company Settings Page','Enrico','administrator',__FILE__,'enrico_settings_page');
@@ -81,7 +82,12 @@ function enrico_settings_page(){
         <tr valign="top">
         <th scope="row">Marker Logo Width:</th>
         <td><input name="enrico_map_marker_logo_width" size="10" type="number" min="10" max="500" value="<?php echo get_option("enrico_map_marker_logo_width");?>" /> px</td>
-        </tr>                  
+        </tr>
+        
+        <tr valign="top">
+        <th scope="row">Enrico posts per page:</th>
+        <td><input name="enrico_archive_posts_per_page" size="10" type="number" min="-1" max="500" value="<?php echo get_option("enrico_archive_posts_per_page");?>" /> (-1 will show all posts on same page)</td>
+        </tr>
             
 
         </tr>

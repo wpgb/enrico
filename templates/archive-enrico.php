@@ -25,9 +25,22 @@
 				$pagemap = new Enrico_Map; //Initialize a map object for the page
 			}
 			
+			// Initiate the Custom Loop.
+			$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 			
-			// Start the Loop.
-			while ( have_posts() ) : the_post(); ?>
+			$args = array(
+							'post_type' => 'enrico',
+							'posts_per_page' => get_option("enrico_archive_posts_per_page"),
+							'paged'=> $paged,
+			
+							'orderby' => 'meta_value',
+  							'meta_key' => 'enrico-postCode',
+  							'order' => 'ASC'
+);
+			// Start the Custom Loop.
+			
+			$loop = new WP_Query( $args );
+			while ( $loop->have_posts() ) : $loop->the_post();?>
 
 				<div class="enrico-multipost-info">
 				
@@ -54,7 +67,7 @@
 				}
 			
 			
-			endwhile;   // End the loop.
+			endwhile; wp_reset_postdata();  // End the loop.
 
 			
 				

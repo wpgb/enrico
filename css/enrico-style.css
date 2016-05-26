@@ -41,6 +41,13 @@
   	
 }
 
+.enrico-input-field {
+	background-color:Yellow;
+	
+}
+
+
+
 .enrico-content-area {
     float: left;
 	
@@ -85,6 +92,9 @@ input[type="search"].enrico-search-field {
 	margin-bottom: 0.5384615385em;
 	text-transform: uppercase;
 }
+
+
+
 
 /**
  * Genericons

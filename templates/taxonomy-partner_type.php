@@ -33,8 +33,30 @@ $queried_taxonomy = get_taxonomy( $queried_object->taxonomy);
 						$pagemap = new Enrico_Map; //Initialize a map object for the page
 						}
 		
-			// Start the Loop.
-			while ( have_posts() ) : the_post(); ?>
+			// Initiate the Custom Loop.
+			$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+			
+			$args = array(
+							'post_type' => 'enrico',
+							'post_status' => 'publish',
+							'posts_per_page' => get_option("enrico_archive_posts_per_page"),
+							'paged'=> $paged,
+			
+							'tax_query' => array(
+										array(
+											'taxonomy' => 'partner_type',
+											'field'    => 'slug',
+											'terms'    => $queried_object->slug,
+										),
+								),
+							
+							'orderby' => 'meta_value',
+  							'meta_key' => 'enrico-postCode',
+  							'order' => 'ASC'
+);
+	// Run the Custom Loop.
+			$loop = new WP_Query( $args );
+			while ( $loop->have_posts() ) : $loop->the_post();?>
 
 				<div class="enrico-multipost-info">
 				
@@ -61,7 +83,7 @@ $queried_taxonomy = get_taxonomy( $queried_object->taxonomy);
 				
 			
 			// End the loop.
-			endwhile;
+			endwhile;wp_reset_postdata();
 		
 			
 			the_posts_pagination( array(
