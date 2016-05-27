@@ -28,6 +28,6 @@ Installation:
 7. Once you have published some companies chek if the enrico templates are working:
             - YOUR URL/enrico/ ...should show you a list of all your companies
             - YOUR URL/YOUR CATEGORYSLUG/ ...should show you a list of all your companies in a CATEGORY
-            - Clicking on a single entry should lin k to a single post page
-            - Known issue: You may need to deactivate/reactivate other plugins for WP to find the enrico templates.
+            - Clicking on a single entry should link to a single post page
+            
 

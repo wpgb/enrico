@@ -50,10 +50,10 @@ $queried_taxonomy = get_taxonomy( $queried_object->taxonomy);
 										),
 								),
 							
-							'orderby' => 'meta_value',
-  							'meta_key' => 'enrico-postCode',
-  							'order' => 'ASC'
-);
+							
+					);
+	
+	
 	// Run the Custom Loop.
 			$loop = new WP_Query( $args );
 			while ( $loop->have_posts() ) : $loop->the_post();?>
