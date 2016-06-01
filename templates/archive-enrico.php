@@ -25,18 +25,53 @@
 				$pagemap = new Enrico_Map; //Initialize a map object for the page
 			}
 			
-			// Initiate the Custom Loop.
+			// Initiate the Custom Loop. Construct arguments for WP Query
 			$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 			
 			$args = array(
 							'post_type' => 'enrico',
+							'post_status' => 'publish',
 							'posts_per_page' => get_option("enrico_archive_posts_per_page"),
 							'paged'=> $paged,
 			
-							'orderby' => 'meta_value',
-  							'meta_key' => 'enrico-postCode',
-  							'order' => 'ASC'
-);
+
+							);
+			switch (get_option("enrico_archive_posts_sort_term")) {
+    				case "default":
+        					
+        							break;
+        			case "post_title":
+        					$args['orderby']='title';
+        							break;
+        							
+        			case "enrico-postCode":
+        					$args['orderby']= 'meta_value';
+        						$args['meta_key'] = 'enrico-postCode';
+        							break;
+        			
+        			case "enrico-latitude":
+        						$args['orderby']= 'meta_value_num' ;
+        						$args['meta_key'] = 'enrico-latitude';
+        						$args['meta_type'] = 'DECIMAL';
+        							break;
+        							
+        			case "enrico-longitude":
+        						$args['orderby']= 'meta_value_num' ;
+        						$args['meta_key'] = 'enrico-longitude';
+        						$args['meta_type'] = 'DECIMAL';
+        							break;
+						}
+        
+        	if(get_option("enrico_archive_posts_sort_order") =='DESC'){
+        			$args['order']= 'DESC';
+        			}
+        		else{
+        			
+        			$args['order']='ASC';
+        			
+        		}
+			
+	
 			// Start the Custom Loop.
 			
 			$loop = new WP_Query( $args );

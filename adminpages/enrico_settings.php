@@ -11,6 +11,8 @@ function enrico_settings_register(){
     register_setting ('enrico_settings_group','enrico_map_marker_logo');
     register_setting ('enrico_settings_group','enrico_map_marker_logo_width');
     register_setting ('enrico_settings_group','enrico_archive_posts_per_page');
+    register_setting ('enrico_settings_group','enrico_archive_posts_sort_term');
+    register_setting ('enrico_settings_group','enrico_archive_posts_sort_order');
 }
 function enrico_settings_menu(){
 add_options_page('Company Settings Page','Enrico','administrator',__FILE__,'enrico_settings_page');
@@ -32,6 +34,14 @@ function enrico_settings_page(){
            add_option('enrico_map_preferredMap','eniro');
        }
        
+       if(!get_option( 'enrico_archive_posts_sort_term' )){
+           add_option('enrico_archive_posts_sort_term','default');
+       }
+       
+       
+       if(!get_option( 'enrico_archive_posts_sort_order' )){
+           add_option('enrico_archive_posts_sort_order','ASC');
+       }
        
        ?>
        
@@ -88,9 +98,42 @@ function enrico_settings_page(){
         <th scope="row">Enrico posts per page:</th>
         <td><input name="enrico_archive_posts_per_page" size="10" type="number" min="-1" max="500" value="<?php echo get_option("enrico_archive_posts_per_page");?>" /> (-1 will show all posts on same page)</td>
         </tr>
+         
+        <tr valign="top">
+        <th scope="row">Archive Sort Term: </th>
+        
+        <td><input name="enrico_archive_posts_sort_term" type="radio" value="default"
+                        <?php checked( 'default', get_option( 'enrico_archive_posts_sort_term' ) ); ?> /> Use Default sort<br>
             
+            
+            <input name="enrico_archive_posts_sort_term" type="radio" value="post_title"
+                        <?php checked( 'post_title', get_option( 'enrico_archive_posts_sort_term' ) ); ?> /> Company Name<br>
+            
+            
+            <input name="enrico_archive_posts_sort_term" type="radio" value="enrico-postCode" 
+                        <?php checked( 'enrico-postCode', get_option( 'enrico_archive_posts_sort_term' ) ); ?> /> Post Code<br>
+                        
+            <input name="enrico_archive_posts_sort_term" type="radio" value="enrico-latitude" 
+                        <?php checked( 'enrico-latitude', get_option( 'enrico_archive_posts_sort_term' ) ); ?> /> Latitude<br> 
+            
+            <input name="enrico_archive_posts_sort_term" type="radio" value="enrico-longitude" 
+                        <?php checked( 'enrico-longitude', get_option( 'enrico_archive_posts_sort_term' ) ); ?> /> Longitude</td>
 
         </tr>
+        
+        
+        <tr valign="top">
+        <th scope="row">Archive Sort Order: </th>
+        
+        <td><input name="enrico_archive_posts_sort_order" type="radio" value="ASC"
+                        <?php checked( 'ASC', get_option( 'enrico_archive_posts_sort_order' ) ); ?> /> Ascending<br>
+                        
+            <input name="enrico_archive_posts_sort_order" type="radio" value="DESC" 
+                        <?php checked( 'DESC', get_option( 'enrico_archive_posts_sort_order' ) ); ?> /> Descending</td>
+
+        </tr>
+        
+            
     </table>
     
     <?php submit_button(); ?>
