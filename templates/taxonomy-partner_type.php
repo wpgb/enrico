@@ -1,33 +1,12 @@
 <?php get_header(); 
 
 $queried_object = get_queried_object();
-$queried_taxonomy = get_taxonomy( $queried_object->taxonomy);
 
 
- ?>
-<div id="primary" class="enrico-content-area" >
-	
-<form role="search" method="get" class="search-form"
+if ( have_posts() ){ 
 			
-			action="<?php echo esc_url( home_url('/'.$queried_taxonomy->rewrite['slug'].'/'.$queried_object->slug)); ?>">
-	
-			
-			<input type="search" class="enrico-search-field"
-						placeholder="<?php echo single_term_title('Sök bland '); ?>" 
-							value="<?php echo get_search_query(); ?>" name="s" 
-								 >
-		
-			<button type="submit" class="enrico-search-submit"></button>
-
-</form>
-<br>
-
-
-
-
-
-		<?php if ( have_posts() ){ 
-			
+			//Initiate the map- if option selected	
+				
 				if(get_option( 'enrico_map_preferredMap' )!='none'){
 			
 						$pagemap = new Enrico_Map; //Initialize a map object for the page

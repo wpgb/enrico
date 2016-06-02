@@ -109,29 +109,7 @@ function enrico_template_include($template_path){
             }
     }
     
-    //check if is search for partner type taxonomy- alternatively if it's the enrico archive
-    elseif (is_search()){
-        $queried_object = get_queried_object();
-        if ($queried_object->taxonomy =="partner_type" && $queried_object->slug ){
-            
-            if ($theme_file = locate_template (array('taxonomy-partner_type.php'))){
-                $template_path = $theme_file;
-                    }
-            else {
-                $template_path = plugin_dir_path(__FILE__).'/templates/taxonomy-partner_type.php';
-                     }
-        }
-        
-        elseif(get_post_type()=='enrico'){
-            if ($theme_file = locate_template (array('archive-enrico.php'))){
-                $template_path = $theme_file;
-            }
-            else {
-                $template_path = plugin_dir_path(__FILE__).'/templates/archive-enrico.php';
-            }
-        }
-    }
-   
+
     //check if single post and  post type enrico
     elseif( is_single() && get_post_type()=='enrico'){
         

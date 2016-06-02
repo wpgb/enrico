@@ -1,20 +1,7 @@
 <?php get_header(); ?>
 <div id="primary" class="enrico-content-area" >
 
-<form role="search" method="get" class="search-form" 
-			
-			action="<?php echo esc_url( home_url('/enrico/')); ?>">
-	
 
-			
-			<input type="search" class="enrico-search-field"
-						placeholder="<?php echo single_term_title('Sök bland '); ?>" 
-							value="<?php echo get_search_query(); ?>" name="s" 
-								 />
-	
-			<button type="submit" class="enrico-search-submit"></button>
-</form>
-<br>
 
 
 <?php
