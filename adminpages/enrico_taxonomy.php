@@ -6,7 +6,7 @@
 
     
 
-//Register Custom Post type for enricoanies (post_type= enrico)
+//Register Custom Post type for enrico directory (post_type= enrico)
 
 function enrico_register_post() {
     

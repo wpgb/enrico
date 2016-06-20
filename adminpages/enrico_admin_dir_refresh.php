@@ -108,16 +108,19 @@ function enrico_directory_refresh_run(){
 			        //action re-added after wp_update
 			        add_action('save_post', 'update_enrico_post_meta',10,2); 
 			        
-			        the_title(' <br> Refreshing: ');
+			        the_title(' <br> Refreshed: ');
 			        
 			    }//Endif
-			    
-        
-    		 
-       
+
+			endwhile; wp_reset_postdata();
+		
 			
-			endwhile; wp_reset_postdata(); 
+		echo '<br><br><a href="'.admin_url('index.php').'">Return to Dashboard</a>';
+		
+//		wp_safe_redirect(admin_url('edit.php?post_type=enrico&page=enrico_dir_refresh'),301);exit;	
+		
 }
+
 }
 
 ?>
