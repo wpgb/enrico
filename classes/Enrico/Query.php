@@ -170,7 +170,9 @@ class Enrico_Query{
 	                                    
 	                                    'enrico-longitude' => $hit_row['longitude'],
 	                                    
-	                                    'enrico-countrycode' => $this->CountryCode,)
+	                                    'enrico-countrycode' => $this->CountryCode,
+	                                    
+	                                    'enrico-auto-update' => 'on',)  //setting auto update to 'on'- so refresh will work without editing the post
 	                        
 	             					) ;
 	

@@ -27,6 +27,7 @@ require_once plugin_dir_path( __FILE__ ).'/includes/enrico_getdata.php';
 require_once plugin_dir_path( __FILE__ ).'/adminpages/enrico_taxonomy.php';
 require_once plugin_dir_path( __FILE__ ).'/adminpages/enrico_metaboxes.php';
 require_once plugin_dir_path( __FILE__ ).'/adminpages/enrico_admin_company_import.php';
+require_once plugin_dir_path( __FILE__ ).'/adminpages/enrico_admin_dir_refresh.php';
 
 
 
@@ -40,6 +41,7 @@ add_action('save_post', 'update_enrico_post_meta', 10, 2);
 //Create options setting menu page
 add_action('admin_menu','enrico_settings_menu');
 add_action( 'admin_menu', 'enrico_admin_import_page' );
+add_action('admin_menu','enrico_dir_refresh_page');
 add_action('admin_init','enrico_settings_register');
 
 
@@ -47,6 +49,7 @@ add_action('admin_init','enrico_settings_register');
 // Page for Import
 add_action('admin_post_import_search_form_submit','enrico_import_run_search');
 add_action('admin_post_import_selected_perform','enrico_import_companies_selected');
+add_action('admin_post_directory_refresh_submit','enrico_directory_refresh_run');
 
 //Session 
 add_action('init', 'enricoStartSession', 1);
