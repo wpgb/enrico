@@ -17,7 +17,7 @@ class Enrico_Links{
 			            		$this->links_html .=  "<a href ='" .get_post_meta($post->ID,'enrico-facebook',true)."' target='_blank'>Facebook</a> | ";
 			           	
 			           	if(get_post_meta($post->ID, "enrico-email", true) !="")
-			            		$this->links_html .=  " | <a href= 'mailto: ".get_post_meta($post->ID, 'enrico-email', true)."' 
+			            		$this->links_html .=  "<a href= 'mailto: ".get_post_meta($post->ID, 'enrico-email', true)."' 
 			            		target='_top' >email</a> | ";
 			            
 			            if(get_post_meta($post->ID, "enrico-infoPageLink", true) !="")
