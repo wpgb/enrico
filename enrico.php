@@ -158,6 +158,8 @@ function enricoEndSession() {
 
 function enrico_cpt_columns($columns){
     
+                $columns['eniroId'] = "EniroID";
+                
                 $columns['phoneNumber'] = "Phone";
                 
                 $columns['email'] = "Email";
@@ -182,8 +184,12 @@ function custom_enrico_column( $column, $post_id ) {
             if ( is_string( $terms ) )
                 echo $terms;
                 break;
+                
+        case 'eniroId' :
+            echo get_post_meta( $post_id , 'enrico-eniroId' , true ); 
+            break; 
          
-         case 'streetName' :
+        case 'streetName' :
             echo get_post_meta( $post_id , 'enrico-streetName' , true ); 
             break;   
 

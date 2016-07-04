@@ -40,6 +40,8 @@ $GLOBALS['enrico_text_fields'] = array(
    
     'enrico-email' =>array( 'Email', 'email','size="50"'),
     
+     'enrico-altURL' =>array( 'Alternative URL', 'url','size="50"'), //used as option to Eniro's webpge- e.g. for a webshop adress. Manual update only
+    
     ); 
 
 
