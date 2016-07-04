@@ -13,6 +13,7 @@ function enrico_settings_register(){
     register_setting ('enrico_settings_group','enrico_archive_posts_per_page');
     register_setting ('enrico_settings_group','enrico_archive_posts_sort_term');
     register_setting ('enrico_settings_group','enrico_archive_posts_sort_order');
+    register_setting ('enrico_settings_group','enrico_link_display');
 }
 function enrico_settings_menu(){
 add_options_page('Company Settings Page','Enrico','administrator',__FILE__,'enrico_settings_page');
@@ -133,10 +134,34 @@ function enrico_settings_page(){
 
         </tr>
         
+        <tr valign="top">
+        <th scope="row">Display Links to: </th>
+        
+        <td><input name="enrico_link_display[homepage]" type="checkbox" value="on"
+                        <?php checked( 'on', get_option( 'enrico_link_display')[homepage] ); ?> /> Homepage<br>
+            
+            <input name="enrico_link_display[facebook]" type="checkbox" value="on"
+                        <?php checked( 'on', get_option( 'enrico_link_display')[facebook] ); ?> /> Facebook<br>
+                        
+            <input name="enrico_link_display[email]" type="checkbox" value="on"
+                        <?php checked( 'on', get_option( 'enrico_link_display')[email] ); ?> /> email<br>
+            
+            <input name="enrico_link_display[infoPageLink]" type="checkbox" value="on"
+                        <?php checked( 'on', get_option( 'enrico_link_display')[infoPageLink] ); ?> /> InfoPage<br>
+                        
+            <input name="enrico_link_display[directions]" type="checkbox" value="on"
+                        <?php checked( 'on', get_option( 'enrico_link_display')[directions] ); ?> /> Directions (Vägbeskrivning)<br><br>
+
+             (The links will be shown in the post archive and in the map marker) </td>
+           
+            
+
+        </tr>
+        
             
     </table>
     
-    <?php submit_button(); ?>
+    <?php  submit_button(); ?>
     
     
 

@@ -10,20 +10,20 @@ class Enrico_Links{
 						$this->links_html ="<span>";
 			            
 			          
-			            if(get_post_meta($post->ID, "enrico-homepage", true) !="")
+			            if(get_option( 'enrico_link_display')[homepage] && get_post_meta($post->ID, "enrico-homepage", true) !="")
 			            	    $this->links_html .= "<a href ='" .get_post_meta($post->ID,'enrico-homepage',true)."' target='_blank'>Hemsida</a> | ";
 			            	
-			            if(get_post_meta($post->ID, "enrico-facebook", true) !="")
+			            if(get_option( 'enrico_link_display')[facebook] && get_post_meta($post->ID, "enrico-facebook", true) !="")
 			            		$this->links_html .=  "<a href ='" .get_post_meta($post->ID,'enrico-facebook',true)."' target='_blank'>Facebook</a> | ";
 			           	
-			           	if(get_post_meta($post->ID, "enrico-email", true) !="")
+			           	if(get_option( 'enrico_link_display')[email] && get_post_meta($post->ID, "enrico-email", true) !="")
 			            		$this->links_html .=  "<a href= 'mailto: ".get_post_meta($post->ID, 'enrico-email', true)."' 
 			            		target='_top' >email</a> | ";
 			            
-			            if(get_post_meta($post->ID, "enrico-infoPageLink", true) !="")
+			            if(get_option( 'enrico_link_display')[infoPageLink] && get_post_meta($post->ID, "enrico-infoPageLink", true) !="")
 			            		$this->links_html .=  "<a href ='" .get_post_meta($post->ID,'enrico-infoPageLink',true)."' target='_blank'>InfoPage</a> | ";
 			            
-			            if (get_post_meta($post->ID, 'enrico-latitude', true) && get_post_meta($post->ID, 'enrico-longitude', true)){
+			            if (get_option( 'enrico_link_display')[directions] && get_post_meta($post->ID, 'enrico-latitude', true) && get_post_meta($post->ID, 'enrico-longitude', true)){
 			                
 			                    if(get_option( 'enrico_map_preferredMap' )=='google'){ //If Google map
 			                                $this->links_html .=  "<a href ='https://maps.google.com?daddr=" 

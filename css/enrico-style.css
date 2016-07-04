@@ -1,5 +1,5 @@
 #enricomapdiv {
-    margin-top: 20px;
+    
 	padding: 0px;
 	
 	
@@ -116,3 +116,9 @@ input[type="search"].enrico-search-field {
 	vertical-align: top;
 }
 
+@media screen and (max-width: 992px) {
+	#enricomapdiv {
+		margin-bottom: 50px;
+		height: 300px;
+	}
+}
