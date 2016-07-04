@@ -3,7 +3,7 @@
 Plugin Name: Enrico
 Plugin URI: http://
 Description: Eniro API support for registering Company Posts
-Version: 1.1
+Version: 1.2
 Author: Gabor Bellak
 Author URI: https://github.com/wpgb/enrico/
 License: GPL
