@@ -9,9 +9,15 @@ class Enrico_Links{
 						
 						$this->links_html ="<span>";
 			            
-			          
-			            if(get_option( 'enrico_link_display')[homepage] && get_post_meta($post->ID, "enrico-homepage", true) !="")
-			            	    $this->links_html .= "<a href ='" .get_post_meta($post->ID,'enrico-homepage',true)."' target='_blank'>Hemsida</a> | ";
+			        	 if(get_option( 'enrico_link_display')[altURL] && get_post_meta($post->ID, "enrico-altURL", true) !="")
+			        			{
+			            	    $this->links_html .= "<a href ='" .get_post_meta($post->ID,'enrico-altURL',true)."' target='_blank'>Hemsida</a> | ";}
+			            	    
+			            	    elseif(get_option( 'enrico_link_display')[homepage] && get_post_meta($post->ID, "enrico-homepage", true) !="")
+			            	    {
+			            	    $this->links_html .= "<a href ='" .get_post_meta($post->ID,'enrico-homepage',true)."' target='_blank'>Hemsida</a> | ";}
+			            	    
+			      
 			            	
 			            if(get_option( 'enrico_link_display')[facebook] && get_post_meta($post->ID, "enrico-facebook", true) !="")
 			            		$this->links_html .=  "<a href ='" .get_post_meta($post->ID,'enrico-facebook',true)."' target='_blank'>Facebook</a> | ";

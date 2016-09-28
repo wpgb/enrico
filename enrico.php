@@ -3,7 +3,7 @@
 Plugin Name: Enrico
 Plugin URI: http://
 Description: Eniro API support for registering Company Posts
-Version: 1.2
+Version: 1.3
 Author: Gabor Bellak
 Author URI: https://github.com/wpgb/enrico/
 License: GPL
@@ -80,7 +80,7 @@ function enrico_add_scripts() {
         wp_enqueue_script('enrico-scripts', plugins_url( '/js/enrico-scripts.js', __FILE__ ));
         
         if(get_option( 'enrico_map_preferredMap' )=='google'){
-                wp_enqueue_script('google-maps', "https://maps.googleapis.com/maps/api/js?key=".get_option("enrico_googleapi_key")."&callback=initMap");
+                wp_enqueue_script('google-maps', "https://maps.googleapis.com/maps/api/js?key=".get_option("enrico_googleapi_key"));
                     }
       
         if(get_option( 'enrico_map_preferredMap' )=='eniro'){

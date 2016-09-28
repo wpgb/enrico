@@ -16,7 +16,7 @@ class Enrico_Infobox{
         		        '" style= "width:'.get_option( 'enrico_map_marker_logo_width' ).'px"><br>';
         		}
         		
-        		$this->infobox_html .= 	'<u><strong><i><a href="' . get_permalink($post) . '">' .get_the_title($post).'</a></u></strong></i><br>'.
+        		$this->infobox_html .= 	'<a href="' . get_permalink($post) . '">' .get_the_title($post).'</a><br>'.
 			        						
 			        						get_post_meta($post->ID, 'enrico-streetName', true).'<br>'.
 			        						

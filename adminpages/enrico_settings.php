@@ -139,6 +139,9 @@ function enrico_settings_page(){
         
         <td><input name="enrico_link_display[homepage]" type="checkbox" value="on"
                         <?php checked( 'on', get_option( 'enrico_link_display')[homepage] ); ?> /> Homepage<br>
+                        
+            <input name="enrico_link_display[altURL]" type="checkbox" value="on"
+                        <?php checked( 'on', get_option( 'enrico_link_display')[altURL] ); ?> /> Use alternative URL (overrides Homepage if available)<br>
             
             <input name="enrico_link_display[facebook]" type="checkbox" value="on"
                         <?php checked( 'on', get_option( 'enrico_link_display')[facebook] ); ?> /> Facebook<br>
