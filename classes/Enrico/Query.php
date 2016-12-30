@@ -75,6 +75,7 @@ class Enrico_Query{
                                     'longitude' => $longitude,
                                     'countrycode' => $this->CountryCode,
                                     'dateRefresh'=> date('Y/m/d'),
+
                                     );
             
             $this->QueryResults[]=  $eniro_search_result  ;    
@@ -173,8 +174,10 @@ class Enrico_Query{
 	                                    
 	                                    'enrico-countrycode' => $this->CountryCode,
 	                                    
+
 	                                    'enrico-dateRefresh' => $hit_row['dateRefresh'],
 	                                    
+
 	                                    'enrico-auto-update' => 'on',)  //setting auto update to 'on'- so refresh will work without editing the post
 	                        
 	             					) ;

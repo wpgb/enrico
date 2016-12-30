@@ -39,8 +39,12 @@ $GLOBALS['enrico_text_fields'] = array(
     'enrico-infoPageLink' => array( 'Eniro page','url','size="50"'), //Do not change the value!
    
     'enrico-email' =>array( 'Email', 'email','size="50"'),
-    
+
     'enrico-altURL' =>array( 'Alternative URL', 'url','size="50"'), //used as option to Eniro's webpge- e.g. for a webshop adress. Manual update only
+
+     'enrico-altURL' =>array( 'Alternative URL', 'url','size="50"'), //used as option to Eniro's webpge- e.g. for a webshop adress. Manual update only
+    
+
     ); 
 
 
@@ -69,10 +73,12 @@ if(!get_post_meta($post->ID, "enrico-countrycode" , true)){
                         <input type="submit" value="Submit"></td>
                 
                 <tr valign="top">
+
                     <th scope="row">Latest Refresh: </th>
                     <td><?php echo get_post_meta($post->ID, 'enrico-dateRefresh', true) ?></td>
                     
                 <tr valign="top">
+
                     <th scope="row">Country Search: </th>        
                 	    
 	    		<td><input type="radio" name="enrico-countrycode" value="se" 

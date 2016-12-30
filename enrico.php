@@ -3,7 +3,11 @@
 Plugin Name: Enrico
 Plugin URI: http://
 Description: Eniro API support for registering Company Posts
+<<<<<<< HEAD
 Version: 1.3.1
+=======
+Version: 1.3
+>>>>>>> 792573ee0c464c6f0ae215aa742cf682d745e6be
 Author: Gabor Bellak
 Author URI: https://github.com/wpgb/enrico/
 License: GPL
@@ -158,8 +162,9 @@ function enricoEndSession() {
 
 function enrico_cpt_columns($columns){
     
+
                 $columns['dateRefresh'] = "RefreshDate";
-                
+
                 $columns['eniroId'] = "EniroID";
                 
                 $columns['phoneNumber'] = "Phone";
@@ -193,6 +198,7 @@ function custom_enrico_column( $column, $post_id ) {
             
         case 'dateRefresh' :
             echo get_post_meta( $post_id , 'enrico-dateRefresh' , true ); 
+
             break; 
          
         case 'streetName' :

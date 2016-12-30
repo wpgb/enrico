@@ -121,7 +121,7 @@ function enrico_directory_refresh_run(){
 			
 		echo '<br><br><a href="'.admin_url('index.php').'">Return to Dashboard</a>';
 		
-//		wp_safe_redirect(admin_url('edit.php?post_type=enrico&page=enrico_dir_refresh'),301);exit;	
+
 		
 }
 
